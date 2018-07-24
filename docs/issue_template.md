@@ -1,3 +1,3 @@
-## User Sroty
+### User Story
 
-## Acceptance Criteria
+### Acceptance Criteria
