@@ -28,5 +28,5 @@ Once added, you should see a new tab in the repository.
 
 1.  Ensure any install or build dependencues are removed before submitted your code for review.
 2.  Update the README.md with details of any changes to interfaces related to information there.
-3.  Submit the PR with any supporting information on what code you are submitting, (i.e. screenshots, demos, etc)
+3.  Submit the PR with any supporting information on what code you are submitting, (i.e. screenshots, demos, etc). You can also reference the issue related to your PR to automatically close it once merged. See github documentation for more.
 4.  You may merge the Pull Request once you have the sign-off of at leasr one other developer, or if you do not have permission to do that, you may request the reviewer to merge it for you.
