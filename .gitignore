@@ -3,6 +3,10 @@ TEST-App.xml
 npm-debug.log
 .DS_Store
 
+# Built CSS
+src/**/*.css
+src/*.css
+
 # Build artifacts
 dist/main.js
 dist/main.css
