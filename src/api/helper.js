@@ -14,16 +14,49 @@ export const parseBook = book => {
 };
 */
 
-let bookData;
-
-function getBookData(book) {
-  return getBook(book).then(result => {
-    // console.log(result[book]);
-    return result[book];
-  });
-}
-
-export const parseBook = book => {
-  bookData = getBookData(book);
-  console.log('data: ', bookData);
+export const getBookData = book => {
+  return getBook(book).then(result =>
+    Promise.resolve(result[book])
+  );
 };
+
+export const getBookBibKey = book => {
+  return getBookData(book).then(result =>
+    Promise.resolve(result.bib_key)
+  );
+};
+
+export const getBookPreview = book => {
+  return getBookData(book).then(result =>
+    Promise.resolve(result.preview)
+  );
+};
+
+export const getBookThumbnailUrl = book => {
+  return getBookData(book).then(result =>
+    Promise.resolve(result.thumbnail_url)
+  );
+};
+
+export const getBookPreviewUrl = book => {
+  return getBookData(book).then(result =>
+    Promise.resolve(result.preview_url)
+  );
+};
+
+export const getBookInfoUrl = book => {
+  return getBookData(book).then(result =>
+    Promise.resolve(result.info_url)
+  );
+};
+
+/* @TODO integrate async data with componentWillMount
+and in result promise returns setState value
+
+  export const parseBook = book => {
+    getBookInfoUrl(book).then(result => {
+      console.log(result);
+    });
+  };
+
+*/
