@@ -45,8 +45,10 @@ class Search extends Component {
     };
   }
   handleSubmit = result => {
+    // @todo replace with api call to getSearchResults with str as input argument
+    let str = result.replace(/ /g, '+');
     this.setState({
-      searchInput: result,
+      searchInput: str,
     });
   };
 
