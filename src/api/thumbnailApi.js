@@ -1,5 +1,3 @@
-import 'whatwg-fetch';
-
 const baseUrl = 'https://openlibrary.org/api/';
 
 export function getBookThumbnail(bookID) {
