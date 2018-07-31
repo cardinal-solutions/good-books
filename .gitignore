@@ -7,7 +7,6 @@ dist
 
 # Built CSS
 src/**/*.css
-src/*.css
 
 # Build artifacts
 dist/main.js
