@@ -1,6 +1,6 @@
 const baseUrl = 'https://openlibrary.org/api/';
 
-export const getBookThumbnail = bookID => {
+export const getBook = bookID => {
   return get(`books?bibkeys=${bookID}&format=json`);
 };
 
