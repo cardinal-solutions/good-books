@@ -1,17 +1,17 @@
 const baseUrl = 'https://openlibrary.org/api/';
 
-export function getBookThumbnail(bookID) {
+export const getBookThumbnail = bookID => {
   return get(`books?bibkeys=${bookID}&format=json`);
-}
+};
 
-function get(url) {
+const get = url => {
   return fetch(baseUrl + url).then(onSuccess, onError);
-}
+};
 
-function onSuccess(response) {
+const onSuccess = response => {
   return response.json();
-}
+};
 
-function onError(error) {
+const onError = error => {
   console.log(error); // eslint-disable-line no-console
-}
+};
