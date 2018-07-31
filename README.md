@@ -34,7 +34,7 @@ yarn start
 
 A list of all the commands available in this project can be found in the package.json.
 
-## Running the tests
+### Running the tests
 
 This project is created using [create-react-app](https://github.com/facebook/create-react-app), using Jest as its test runner. See the [Jest documentation on testing react apps](https://jestjs.io/docs/en/tutorial-react) as a guide for how to create test suites for new components.
 
@@ -58,4 +58,4 @@ We use [prettier](https://github.com/prettier/prettier) to enforce coding style 
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](../docs/CONTRIBUTING.md) for details on the process for submitting pull requests to good-books.
+Please read [CONTRIBUTING.md](https://github.com/cardinal-solutions/good-books/blob/master/docs/CONTRIBUTING.md) for details on the process for submitting pull requests to good-books.
