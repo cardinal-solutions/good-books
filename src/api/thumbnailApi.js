@@ -1,13 +1,13 @@
 import 'whatwg-fetch';
 
-export function getThumbnails() {
-  return get(
-    'https://openlibrary.org/api/books?bibkeys=ISBN:0385472579&format=json'
-  );
+const baseUrl = 'https://openlibrary.org/api/';
+
+export function getBookThumbnail(bookID) {
+  return get(`books?bibkeys=${bookID}&format=json`);
 }
 
 function get(url) {
-  return fetch(url).then(onSuccess, onError);
+  return fetch(baseUrl + url).then(onSuccess, onError);
 }
 
 function onSuccess(response) {

@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { getThumbnails } from './api/thumbnailApi';
+import { getBookThumbnail } from './api/thumbnailApi';
 import './App.css';
 
 class App extends Component {
-  renderThumbnails = () => {
-    getThumbnails().then(result => {
+  renderThumbnails = book => {
+    getBookThumbnail(book).then(result => {
       console.log('result: ', result);
     });
   };
 
   render() {
+    const bookID = 'ISBN:0385472579';
     return (
       <div className="App">
         <h1>Hello World</h1>
 
-        {this.renderThumbnails()}
+        {this.renderThumbnails(bookID)}
       </div>
     );
   }
