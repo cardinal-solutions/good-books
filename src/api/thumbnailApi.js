@@ -1,7 +1,9 @@
 import 'whatwg-fetch';
 
 export function getThumbnails() {
-  return get('users');
+  return get(
+    'https://openlibrary.org/api/books?bibkeys=ISBN:0385472579&format=json'
+  );
 }
 
 function get(url) {
