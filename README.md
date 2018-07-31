@@ -8,11 +8,7 @@ These instructions will walk you through copying running the project locally for
 
 ### Prerequisites
 
-Node.js JavaScript Runtime
-
-```
-Give examples
-```
+[Node.js](https://nodejs.org/en/download/) - JavaScript Runtime. See their documentation for download instructions for your operating system.
 
 ### Installing
 
@@ -21,13 +17,13 @@ Follow these steps to get a development environment running.
 Clone the project to get a copy of the project locally from the command line:
 
 ```
-git clone git@github.com:cardinal-solutions/good-books.git <folder-name>
+git clone git@github.com:cardinal-solutions/good-books.git
 ```
 
-Point your terminal to the `<folder-name>` direcrory:
+Point your terminal to the newly created `good-books` directory:
 
 ```
-cd <folder-name>
+cd good-books
 ```
 
 Start the development server:
@@ -54,7 +50,7 @@ We use [prettier](https://github.com/prettier/prettier) to enforce coding style 
 
 # Deployment
 
-TBD.
+@TODO add deployment steps.
 
 ## Built With
 
