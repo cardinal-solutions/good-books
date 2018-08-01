@@ -10,7 +10,8 @@ class Header extends Component {
 
   render() {
     return (
-      <nav>
+      <nav className="Header">
+        <span className="Header__title">Good Books</span>
         <ul>
           <li>
             <Link to="/">Home</Link>
