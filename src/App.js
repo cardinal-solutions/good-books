@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+
+import Header from './components/Header';
 import './App.css';
 
 import entryRoutes from './routes';
@@ -13,19 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Good Books</h1>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/book">Book</Link>
-            </li>
-            <li>
-              <Link to="/search">Search</Link>
-            </li>
-          </ul>
-        </nav>
+        <Header />
 
         <Switch>{renderRoutes()}</Switch>
       </div>
