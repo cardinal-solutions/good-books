@@ -15,8 +15,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-
-        <Switch>{renderRoutes()}</Switch>
+        <div className="App__body">
+          <Switch>{renderRoutes()}</Switch>
+        </div>
       </div>
     );
   }
