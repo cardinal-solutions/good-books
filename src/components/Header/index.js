@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import SearchBar from '../search-bar/index';
+
 import './Header.css';
 
 class Header extends Component {
@@ -8,6 +10,9 @@ class Header extends Component {
     this.state = {};
   }
 
+  handleSubmit = results => {
+    console.log(results);
+  };
   render() {
     return (
       <nav className="Header">
@@ -20,7 +25,7 @@ class Header extends Component {
             <Link to="/book">Book</Link>
           </li>
           <li>
-            <Link to="/search">Search</Link>
+            <SearchBar handleSubmit={this.handleSubmit} />
           </li>
         </ul>
       </nav>
