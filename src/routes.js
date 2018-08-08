@@ -15,6 +15,10 @@ export default [
     component: Book,
   },
   {
+    path: '/book/:bookid',
+    component: Book,
+  },
+  {
     path: '/500',
     exact: true,
     component: ServerError,
