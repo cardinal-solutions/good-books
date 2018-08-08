@@ -4,7 +4,7 @@ Find and rate books you love!
 
 ## Getting Started
 
-These instructions will walk you through copying running the project locally for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will walk you through running the project locally for development and testing purposes. See [deployment](#deployment) for instructions on how to deploy good books on a live system.
 
 ## Prerequisites
 
@@ -12,9 +12,9 @@ These instructions will walk you through copying running the project locally for
 
 ## Installing
 
-Follow these steps to get a development environment running.
+Follow these steps to get a development environment running:
 
-Clone the project to get a copy of the project locally from the command line:
+To get a copy of the project locally, clone the repository from the command line:
 
 ```
 git clone git@github.com:cardinal-solutions/good-books.git
@@ -32,11 +32,11 @@ Start the development server:
 yarn start
 ```
 
-A list of all the commands available in this project can be found in the package.json.
+The full list of commands can be found in the package.json.
 
 ## Running the tests
 
-This project is created using [create-react-app](https://github.com/facebook/create-react-app), using Jest as its test runner. See the [Jest documentation on testing react apps](https://jestjs.io/docs/en/tutorial-react) as a guide for how to create test suites for new components.
+Good Books was created using [create-react-app](https://github.com/facebook/create-react-app), using Jest as its test runner. See the [Jest documentation on testing react apps](https://jestjs.io/docs/en/tutorial-react) as a guide for how to create test suites for new components.
 
 To run tests defined in the `/tests/` directory:
 
