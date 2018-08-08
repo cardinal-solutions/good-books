@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import SearchBar from '../search-bar/index';
+import { Link } from 'react-router-dom';
 
 import './Header.css';
 
@@ -9,11 +8,8 @@ class Header extends Component {
     super(props);
     this.state = {};
   }
-
-  handleSubmit = results => {
-    console.log(results);
-  };
   render() {
+    //   @todo: <Searchbar /> and its state needs to be lifted here to manage programmtic routing to /search
     return (
       <nav className="Header">
         <span className="Header__title">Good Books</span>
@@ -25,7 +21,7 @@ class Header extends Component {
             <Link to="/book">Book</Link>
           </li>
           <li>
-            <SearchBar handleSubmit={this.handleSubmit} />
+            <Link to="/search">Search</Link>
           </li>
         </ul>
       </nav>

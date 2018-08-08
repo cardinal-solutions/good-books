@@ -6,7 +6,6 @@ class SearchBar extends Component {
     super(props);
     this.state = {
       value: '',
-      showResults: false,
       searchResults: [],
     };
   }
@@ -20,25 +19,18 @@ class SearchBar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const searchInput = this.changeStr(this.state.value);
-
+    // @todo: need to also be able to search by author and isbn
     getSearchResults('title', searchInput).then(results => {
       this.setResults(results);
     });
-
-    if (this.state.searchResults === 0) {
-      getSearchResults('author', searchInput).then(
-        results => {
-          this.setResults(results);
-        }
-      );
-    }
-    console.log(this.state.searchResults);
   };
 
   setResults = results => {
-    this.setState({
-      searchResults: results,
-    });
+    this.setState(
+      ({ searchResults }) => ({ searchResults: results }),
+      () =>
+        this.props.handleSubmit(this.state.searchResults)
+    );
   };
 
   changeStr = input => {
@@ -47,6 +39,7 @@ class SearchBar extends Component {
 
   render() {
     return (
+      // @todo: input needs to be own component to be used as filter in the future //
       <form role="search" onSubmit={this.handleSubmit}>
         <input
           type="text"
