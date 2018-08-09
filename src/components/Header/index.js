@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import './Header.css';
 
 class Header extends Component {
@@ -7,8 +8,8 @@ class Header extends Component {
     super(props);
     this.state = {};
   }
-
   render() {
+    //   @todo: <Searchbar /> and its state needs to be lifted here to manage programmtic routing to /search
     return (
       <nav className="Header">
         <span className="Header__title">Good Books</span>

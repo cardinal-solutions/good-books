@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Header from './components/Header';
+import Header from './components/header';
 import './App.css';
 
 import entryRoutes from './routes';
 const renderRoutes = () =>
-  entryRoutes.map((data, key) => (
-    <Route key={key} {...data} />
-  ));
+  entryRoutes.map((data, key) => {
+    console.log(data);
+    return <Route key={key} {...data} />;
+  });
 
 class App extends Component {
   render() {
