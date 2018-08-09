@@ -18,10 +18,16 @@ class Search extends Component {
 
   render() {
     const { searchResults } = this.state;
+    const hasResults = searchResults.length === 0;
+
     return (
       <div>
         <SearchBar handleSubmit={this.handleSubmit} />
-        <SearchResults results={searchResults} />
+        {hasResults ? (
+          'No Results'
+        ) : (
+          <SearchResults results={searchResults} />
+        )}
       </div>
     );
   }

@@ -18,13 +18,17 @@ class SearchBar extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.clear();
+
     const searchInput = this.changeStr(this.state.value);
-    // @todo: need to also be able to search by author and isbn
-    getSearchResults('title', searchInput).then(results => {
+    getSearchResults(searchInput).then(results => {
       this.setResults(results);
     });
   };
 
+  clear = () => {
+    this.setState({ value: '' });
+  };
   setResults = results => {
     this.setState(
       ({ searchResults }) => ({ searchResults: results }),
