@@ -66,7 +66,7 @@ export const getBookPublishers = book => {
 /* pagination data type: "xiii, 657 p. :" */
 export const getBookPagination = book => {
   return getFullBookData(book).then(result =>
-    Promise.resolve(result.publishers)
+    Promise.resolve(result.pagination)
   );
 };
 

@@ -7,7 +7,7 @@ import './App.css';
 import entryRoutes from './routes';
 const renderRoutes = () =>
   entryRoutes.map((data, key) => {
-    console.log(data);
+    // console.log(data);
     return <Route key={key} {...data} />;
   });
 
