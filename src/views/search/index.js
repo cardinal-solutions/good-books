@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/search-bar';
+import ListView from '../../components/list-view';
 // @todo: searchresults needs to be it's own <ListView /> component
 const SearchResults = ({ results }) => {
-  return results.map((item, idx) => (
-    <div>{item.title_suggest}</div>
+  return results.map((book, idx) => (
+    <ListView
+      title={book.title_suggest}
+      author={book.author_name}
+      coverType="olid"
+      bookId={book.cover_edition_key}
+    />
   ));
 };
 // @todo:  Need to programmatically route to Search from any url
