@@ -11,10 +11,6 @@ export default [
     component: Home,
   },
   {
-    path: '/book',
-    component: Book,
-  },
-  {
     path: '/search',
     exact: true,
     component: Search,
@@ -22,6 +18,11 @@ export default [
   {
     path: '/book/:bookid',
     component: Book,
+  },
+  {
+    path: '/book',
+    component: Book,
+    exact: true,
   },
   {
     path: '/500',

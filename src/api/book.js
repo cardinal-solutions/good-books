@@ -5,7 +5,9 @@ export const getBook = bookID => {
 };
 
 export const getBookFullData = bookID => {
-  return get(`books?bibkeys=${bookID}&jscmd=data`);
+  return get(
+    `books?bibkeys=${bookID}&format=json&jscmd=data`
+  );
 };
 
 const get = url => {
@@ -19,3 +21,14 @@ const onSuccess = response => {
 const onError = error => {
   console.log(error); // eslint-disable-line no-console
 };
+
+// export const getBookFullData = bookID => {
+//   return fetch(`${baseUrl}books?bibkeys=${bookID}&format=json&jscmd=data`)
+//     .then(response => {
+//       console.log(response)
+//       return response.json();
+//     })
+//     .then(error => {
+//       console.log(error);
+//     });
+// };
