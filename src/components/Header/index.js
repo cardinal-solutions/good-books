@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withTheme } from '@material-ui/core/styles';
 
 import './Header.css';
 
@@ -29,4 +30,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withTheme()(Header);
