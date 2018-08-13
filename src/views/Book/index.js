@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import {
+  withTheme,
+  withStyles,
+} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
+import {
   getBookThumbnailUrl,
   getBookPreviewUrl,
+  getBookTitle,
   getFullBookData,
 } from '../../api/helper';
 
@@ -11,6 +19,17 @@ import './Book.css';
 import { getBookFullData } from '../../api/book';
 
 // const bookID = 'ISBN:0385472579';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    padding: 24,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'left',
+  },
+});
 
 class Book extends Component {
   constructor(props) {
@@ -22,7 +41,7 @@ class Book extends Component {
     };
 
     const bookid = this.props.match.params.bookid;
-    getBookPreviewUrl(bookid).then(title => {
+    getBookTitle(bookid).then(title => {
       // console.log('title: ', title);
       this.setState({ title });
     });
@@ -55,19 +74,26 @@ class Book extends Component {
   // }
 
   render() {
-    const { match } = this.props;
+    const { classes, match } = this.props;
     const { cover, title } = this.state;
     return (
-      <div className="Book">
-        <strong>Book</strong>
-        {/* {console.log(match.params)} */}
-        {match.params.bookid}
+      <div className={classes.root}>
+        <Grid container spacing={24}>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              <strong>{match.params.bookid}</strong>
 
-        {title}
-        {/*
-        {this.callApi()} */}
+              {/* {getBookThumbnailUrl(bookID)} */}
+            </Paper>
+          </Grid>
+          <Grid item xs={8}>
+            <Paper className={classes.paper}>
+              <strong>{title}</strong>
 
-        {/* {getBookThumbnailUrl(bookID)} */}
+              {/* {getBookThumbnailUrl(bookID)} */}
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     );
   }
@@ -75,10 +101,13 @@ class Book extends Component {
 
 Book.propTypes = {
   match: PropTypes.object,
+  classes: PropTypes.object.isRequired,
 };
 
 Book.defaultProps = {
   match: {},
 };
 
-export default withRouter(Book);
+export default withTheme()(
+  withStyles(styles)(withRouter(Book))
+);
