@@ -84,7 +84,12 @@ class Book extends Component {
     const bookid = match.params.bookid;
 
     getFullBookData(bookid).then(book => {
-      this.setState({ book });
+      this.setState({
+        book,
+        key: book.key,
+      });
+
+      console.log(book);
     });
 
     getBookClassifications(bookid).then(result => {
@@ -98,10 +103,6 @@ class Book extends Component {
 
     getBookCover(bookid).then(cover => {
       this.setState({ cover: cover.large });
-    });
-
-    getBookKey(bookid).then(key => {
-      this.setState({ key });
     });
 
     getBookNumberOfPages(bookid).then(pages => {
