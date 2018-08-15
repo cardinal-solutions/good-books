@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
   withTheme,
   withStyles,
@@ -58,8 +58,11 @@ class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authors: [],
-      classifications: {},
+      authors: '',
+      classifications: {
+        dewey: '',
+        lc: '',
+      },
       cover: '/empty.jpg',
       key: '',
       pages: 0,
@@ -69,14 +72,14 @@ class Book extends Component {
       book: {},
     };
 
-    const bookid = this.props.match.params.bookid;
-    getBookTitle(bookid).then(title => {
-      this.setState({ title });
-    });
+    // const bookid = this.props.match.params.bookid;
+    // getBookTitle(bookid).then(title => {
+    //   this.setState({ title });
+    // });
 
-    getBookAuthors(bookid).then(authors => {
-      this.setState({ authors: authors[0] });
-    });
+    // getBookAuthors(bookid).then(authors => {
+    //   this.setState({ authors: authors[0] });
+    // });
   }
 
   componentDidMount = () => {
@@ -84,43 +87,66 @@ class Book extends Component {
     const bookid = match.params.bookid;
 
     getFullBookData(bookid).then(book => {
+      let publishPlaces = book.publish_places.map(place => {
+        return place['name'];
+      });
+
+      let authors = book.authors.map(author => {
+        return (
+          <a href={author.url} key={author.name}>
+            {author.name}
+          </a>
+        );
+      });
+
       this.setState({
         book,
+        authors,
         key: book.key,
+        classifications: {
+          dewey:
+            book.classifications.dewey_decimal_class[0],
+          lc: book.classifications.lc_classifications[0],
+        },
+        cover: book.cover.large,
+        pages: book.number_of_pages,
+        publishDate: book.publish_date,
+        publishPlaces: publishPlaces.join(', '),
+        title: book.title,
       });
 
       console.log(book);
     });
 
-    getBookClassifications(bookid).then(result => {
-      this.setState({
-        classifications: {
-          dewey: result.dewey_decimal_class[0],
-          lc: result.lc_classifications[0],
-        },
-      });
-    });
+    // getBookClassifications(bookid).then(result => {
+    //   this.setState({
+    //     classifications: {
+    //       dewey: result.dewey_decimal_class[0],
+    //       lc: result.lc_classifications[0],
+    //     },
+    //   });
+    // });
 
-    getBookCover(bookid).then(cover => {
-      this.setState({ cover: cover.large });
-    });
+    // getBookCover(bookid).then(cover => {
+    //   this.setState({ cover: cover.large });
+    // });
 
-    getBookNumberOfPages(bookid).then(pages => {
-      this.setState({ pages });
-    });
+    // getBookNumberOfPages(bookid).then(pages => {
+    //   this.setState({ pages });
+    // });
 
-    getBookPublishDate(bookid).then(publishDate => {
-      this.setState({ publishDate });
-    });
+    // getBookPublishDate(bookid).then(publishDate => {
+    //   this.setState({ publishDate });
+    // });
 
-    getBookPublishPlaces(bookid).then(places => {
-      let publishPlaces = places.map(place => {
-        return place['name'];
-      });
+    // getBookPublishPlaces(bookid).then(places => {
+    //   let publishPlaces = places.map(place => {
+    //     return place['name'];
+    //   });
 
-      publishPlaces = publishPlaces.join(', ');
-      this.setState({ publishPlaces });
-    });
+    //   publishPlaces = publishPlaces.join(', ');
+    //   this.setState({ publishPlaces });
+    // });
   };
 
   render() {
@@ -172,7 +198,7 @@ class Book extends Component {
               <TableBody>
                 <TableRow>
                   <TableCell>Author</TableCell>
-                  <TableCell>{authors.name}</TableCell>
+                  <TableCell>{authors}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Book Key</TableCell>
