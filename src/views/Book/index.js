@@ -21,6 +21,8 @@ import {
   getBookAuthors,
   getBookClassifications,
   getBookKey,
+  getBookNumberOfPages,
+  getBookPublishDate,
   getBookTitle,
   getFullBookData,
 } from '../../api/helper';
@@ -58,6 +60,8 @@ class Book extends Component {
       classifications: {},
       cover: {},
       key: '',
+      pages: 0,
+      publishDate: '',
       title: '',
       book: {},
     };
@@ -95,6 +99,14 @@ class Book extends Component {
     getBookKey(bookid).then(key => {
       this.setState({ key });
     });
+
+    getBookNumberOfPages(bookid).then(pages => {
+      this.setState({ pages });
+    });
+
+    getBookPublishDate(bookid).then(publishDate => {
+      this.setState({ publishDate });
+    });
   };
 
   render() {
@@ -104,6 +116,8 @@ class Book extends Component {
       classifications,
       cover,
       key,
+      pages,
+      publishDate,
       title,
       book,
     } = this.state;
@@ -162,6 +176,14 @@ class Book extends Component {
                   <TableCell>
                     {classifications.lc}
                   </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Number of Pages</TableCell>
+                  <TableCell>{pages}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Publish Date</TableCell>
+                  <TableCell>{publishDate}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
