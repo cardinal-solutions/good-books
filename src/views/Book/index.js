@@ -71,15 +71,6 @@ class Book extends Component {
       title: '',
       book: {},
     };
-
-    // const bookid = this.props.match.params.bookid;
-    // getBookTitle(bookid).then(title => {
-    //   this.setState({ title });
-    // });
-
-    // getBookAuthors(bookid).then(authors => {
-    //   this.setState({ authors: authors[0] });
-    // });
   }
 
   componentDidMount = () => {
@@ -117,36 +108,6 @@ class Book extends Component {
 
       console.log(book);
     });
-
-    // getBookClassifications(bookid).then(result => {
-    //   this.setState({
-    //     classifications: {
-    //       dewey: result.dewey_decimal_class[0],
-    //       lc: result.lc_classifications[0],
-    //     },
-    //   });
-    // });
-
-    // getBookCover(bookid).then(cover => {
-    //   this.setState({ cover: cover.large });
-    // });
-
-    // getBookNumberOfPages(bookid).then(pages => {
-    //   this.setState({ pages });
-    // });
-
-    // getBookPublishDate(bookid).then(publishDate => {
-    //   this.setState({ publishDate });
-    // });
-
-    // getBookPublishPlaces(bookid).then(places => {
-    //   let publishPlaces = places.map(place => {
-    //     return place['name'];
-    //   });
-
-    //   publishPlaces = publishPlaces.join(', ');
-    //   this.setState({ publishPlaces });
-    // });
   };
 
   render() {
@@ -183,8 +144,6 @@ class Book extends Component {
             <Paper className={classes.paper}>
               <h1>{title}</h1>
               {book.subtitle}
-
-              {/* {getBookThumbnailUrl(bookID)} */}
             </Paper>
 
             <Table className={classes.table}>
