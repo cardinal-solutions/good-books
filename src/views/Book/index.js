@@ -47,7 +47,7 @@ const styles = theme => ({
   },
   media: {
     height: 0,
-    paddingTop: '100%', // 16:9
+    paddingTop: '100%',
   },
   table: {
     marginTop: 48,
