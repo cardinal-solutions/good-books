@@ -20,9 +20,11 @@ import TableRow from '@material-ui/core/TableRow';
 import {
   getBookAuthors,
   getBookClassifications,
+  getBookCover,
   getBookKey,
   getBookNumberOfPages,
   getBookPublishDate,
+  getBookPublishPlaces,
   getBookTitle,
   getFullBookData,
 } from '../../api/helper';
@@ -58,10 +60,11 @@ class Book extends Component {
     this.state = {
       authors: [],
       classifications: {},
-      cover: {},
+      cover: '/empty.jpg',
       key: '',
       pages: 0,
       publishDate: '',
+      publishPlaces: '',
       title: '',
       book: {},
     };
@@ -82,9 +85,8 @@ class Book extends Component {
 
     getFullBookData(bookid).then(book => {
       this.setState({ book });
-      this.setState({ cover: book.cover.large });
+      // this.setState({ cover: book.cover.large });
       // this.setState({ authors: book.authors });
-      console.log(book);
     });
 
     getBookClassifications(bookid).then(result => {
@@ -94,6 +96,10 @@ class Book extends Component {
           lc: result.lc_classifications[0],
         },
       });
+    });
+
+    getBookCover(bookid).then(cover => {
+      this.setState({ cover: cover.large });
     });
 
     getBookKey(bookid).then(key => {
@@ -107,6 +113,16 @@ class Book extends Component {
     getBookPublishDate(bookid).then(publishDate => {
       this.setState({ publishDate });
     });
+
+    getBookPublishPlaces(bookid).then(places => {
+      let publishPlaces = places.map(place => {
+        return place['name'];
+      });
+
+      publishPlaces = publishPlaces.join(', ');
+      console.log(publishPlaces);
+      this.setState({ publishPlaces });
+    });
   };
 
   render() {
@@ -118,6 +134,7 @@ class Book extends Component {
       key,
       pages,
       publishDate,
+      publishPlaces,
       title,
       book,
     } = this.state;
@@ -184,6 +201,10 @@ class Book extends Component {
                 <TableRow>
                   <TableCell>Publish Date</TableCell>
                   <TableCell>{publishDate}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Publish Place(s)</TableCell>
+                  <TableCell>{publishPlaces}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
