@@ -85,8 +85,6 @@ class Book extends Component {
 
     getFullBookData(bookid).then(book => {
       this.setState({ book });
-      // this.setState({ cover: book.cover.large });
-      // this.setState({ authors: book.authors });
     });
 
     getBookClassifications(bookid).then(result => {
@@ -120,7 +118,6 @@ class Book extends Component {
       });
 
       publishPlaces = publishPlaces.join(', ');
-      console.log(publishPlaces);
       this.setState({ publishPlaces });
     });
   };
