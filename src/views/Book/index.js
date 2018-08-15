@@ -17,17 +17,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import {
-  getBookAuthors,
-  getBookClassifications,
-  getBookCover,
-  getBookKey,
-  getBookNumberOfPages,
-  getBookPublishDate,
-  getBookPublishPlaces,
-  getBookTitle,
-  getFullBookData,
-} from '../../api/helper';
+import { getFullBookData } from '../../api/helper';
 
 import './Book.css';
 
