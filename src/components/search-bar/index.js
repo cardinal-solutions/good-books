@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Search from '@material-ui/icons/Search';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import { getSearchResults } from '../../api/search';
 class SearchBar extends Component {
   constructor(props) {
@@ -18,13 +21,17 @@ class SearchBar extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    this.clear();
+
     const searchInput = this.changeStr(this.state.value);
-    // @todo: need to also be able to search by author and isbn
-    getSearchResults('title', searchInput).then(results => {
+    getSearchResults(searchInput).then(results => {
       this.setResults(results);
     });
   };
 
+  clear = () => {
+    this.setState({ value: '' });
+  };
   setResults = results => {
     this.setState(
       ({ searchResults }) => ({ searchResults: results }),
@@ -39,15 +46,23 @@ class SearchBar extends Component {
 
   render() {
     return (
-      // @todo: input needs to be own component to be used as filter in the future //
-      <form role="search" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-          placeholder="Search by ISBN, title, or author"
-          style={{ width: '50%' }}
-        />
+      <form
+        role="search"
+        onSubmit={this.handleSubmit}
+        style={{ margin: '5% 0' }}>
+        <Grid container spacing={8} alignItems="flex-end">
+          <Grid item>
+            <Search />
+          </Grid>
+          <Grid item>
+            <TextField
+              id="input-with-icon-grid"
+              label="Search Books..."
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </Grid>
+        </Grid>
       </form>
     );
   }
