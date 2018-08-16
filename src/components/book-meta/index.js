@@ -10,7 +10,7 @@ class BookMeta extends React.Component {
 
   render() {
     return (
-      <div className="BookMeta">
+      <div>
         {React.Children.map(this.props.children, child =>
           React.cloneElement(child, {
             title: this.props.title,
