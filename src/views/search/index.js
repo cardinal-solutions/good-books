@@ -77,8 +77,7 @@ class Search extends Component {
     const styles = {
       container: {
         maxWidth: '900px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        margin: '5% auto',
       },
     };
 
@@ -86,7 +85,9 @@ class Search extends Component {
       <div style={styles.container}>
         <SearchBar handleSubmit={this.handleSubmit} />
         {hasResults ? (
-          <div>{displayResult}</div>
+          <div style={styles.container}>
+            {displayResult}
+          </div>
         ) : (
           <SearchResults results={searchResults} />
         )}

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import { getSearchResults } from '../../api/search';
 class SearchBar extends Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class SearchBar extends Component {
   };
   setResults = results => {
     this.setState(
-      ({ searchResults }) => ({ searchResults: results }),
+      () => ({ searchResults: results }),
       () =>
         this.props.handleSubmit(this.state.searchResults)
     );
@@ -46,10 +45,7 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form
-        role="search"
-        onSubmit={this.handleSubmit}
-        style={{ margin: '5% 0' }}>
+      <form role="search" onSubmit={this.handleSubmit}>
         <Grid container spacing={8} alignItems="flex-end">
           <Grid item>
             <Search />
