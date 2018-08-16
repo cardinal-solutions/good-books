@@ -1,7 +1,34 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/search-bar';
 import ListView from '../../components/list-view';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 // @todo: searchresults needs to be it's own <ListView /> component
+
+const NoResults = () => (
+  <div>
+    <Typography variant="display3">
+      No Results Found
+    </Typography>
+    <Divider />
+    <Typography variant="body2">
+      Looking for a book?
+    </Typography>
+    <ul>
+      <li>
+        <Typography variant="body2">
+          Search by both title, author, and double-check the
+          spelling.
+        </Typography>
+      </li>
+      <li>
+        <Typography variant="body2">
+          Try searching by ISBN.
+        </Typography>
+      </li>
+    </ul>
+  </div>
+);
 const SearchResults = ({ results }) => {
   return results
     .filter(
@@ -13,6 +40,7 @@ const SearchResults = ({ results }) => {
         author={book.author_name}
         coverType="olid"
         bookId={book.cover_edition_key}
+        key={`book-${idx}`}
       />
     ));
 };
@@ -25,10 +53,8 @@ class Search extends Component {
   };
 
   handleSubmit = results => {
-    // this.setState({ searchResults: results });
-
     this.setState(
-      ({ searchResults }) => ({ searchResults: results }),
+      () => ({ searchResults: results }),
       () => this.showResults()
     );
   };
@@ -42,21 +68,25 @@ class Search extends Component {
   render() {
     const { searchResults, noResults } = this.state;
     const hasResults = searchResults.length === 0;
-    const displayResult = noResults
-      ? 'No Results found'
-      : 'Search for books';
+    const displayResult = noResults ? (
+      <NoResults />
+    ) : (
+      'Search for books'
+    );
+
+    const styles = {
+      container: {
+        maxWidth: '900px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
+    };
 
     return (
-      <div>
+      <div style={styles.container}>
         <SearchBar handleSubmit={this.handleSubmit} />
         {hasResults ? (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-            }}>
-            {displayResult}
-          </div>
+          <div>{displayResult}</div>
         ) : (
           <SearchResults results={searchResults} />
         )}
