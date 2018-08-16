@@ -1,45 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class Thumbnail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      thumbnailUrl: '',
-    };
-  }
-
-  render() {
-    const { thumbnailUrl } = this.state;
-    const { coverType, bookId } = this.props;
-    return (
-      <div className="Thumbnail">
-        {this.props.custom ? (
-          <img
-            src={`http://covers.openlibrary.org/b/${coverType}/${bookId}-L.jpg`}
-          />
-        ) : (
-          <img src={thumbnailUrl} />
-        )}
-      </div>
-    );
-  }
-}
-
-Thumbnail.propTypes = {
-  size: PropTypes.string,
-  cover: PropTypes.object,
-  custom: PropTypes.bool,
-  type: PropTypes.string,
-  bookId: PropTypes.string,
+const style = {
+  container: { width: '300px' },
+  img: { minWidth: '300px', maxWidth: '100%' },
 };
-
-Thumbnail.defaultProps = {
-  size: '',
-  cover: {},
-  custom: false,
-  type: '',
-  bookId: '',
-};
+const Thumbnail = ({ coverType, bookId }) => (
+  <div style={style.container}>
+    <img
+      style={style.img}
+      src={`http://covers.openlibrary.org/b/${coverType}/${bookId}-L.jpg`}
+    />
+  </div>
+);
 
 export default Thumbnail;
