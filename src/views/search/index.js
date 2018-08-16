@@ -16,25 +16,47 @@ const SearchResults = ({ results }) => {
       />
     ));
 };
+
 // @todo:  Need to programmatically route to Search from any url
 class Search extends Component {
   state = {
     searchResults: [],
+    noResults: false,
   };
 
   handleSubmit = results => {
-    this.setState({ searchResults: results });
+    // this.setState({ searchResults: results });
+
+    this.setState(
+      ({ searchResults }) => ({ searchResults: results }),
+      () => this.showResults()
+    );
+  };
+
+  showResults = () => {
+    this.setState({
+      noResults: true,
+    });
   };
 
   render() {
-    const { searchResults } = this.state;
+    const { searchResults, noResults } = this.state;
     const hasResults = searchResults.length === 0;
+    const displayResult = noResults
+      ? 'No Results found'
+      : 'Search for books';
 
     return (
       <div>
         <SearchBar handleSubmit={this.handleSubmit} />
         {hasResults ? (
-          'No Results'
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}>
+            {displayResult}
+          </div>
         ) : (
           <SearchResults results={searchResults} />
         )}

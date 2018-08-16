@@ -46,16 +46,6 @@ class SearchBar extends Component {
 
   render() {
     return (
-      // @todo: input needs to be own component to be used as filter in the future //
-      //   <form role="search" onSubmit={this.handleSubmit}>
-      //     <input
-      //       type="text"
-      //       value={this.state.value}
-      //       onChange={this.handleChange}
-      //       placeholder="Search by ISBN, title, or author"
-      //       style={{ width: '50%' }}
-      //     />
-      //   </form>
       <form
         role="search"
         onSubmit={this.handleSubmit}
@@ -64,13 +54,12 @@ class SearchBar extends Component {
           <Grid item>
             <Search />
           </Grid>
-          <Grid item lg={12}>
+          <Grid item>
             <TextField
               id="input-with-icon-grid"
               label="Search Books..."
               value={this.state.value}
               onChange={this.handleChange}
-              fullWidth
             />
           </Grid>
         </Grid>
