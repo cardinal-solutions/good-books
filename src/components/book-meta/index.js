@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 class BookMeta extends React.Component {
   static Title = ({ title }) => (
@@ -22,5 +23,11 @@ class BookMeta extends React.Component {
     );
   }
 }
+
+BookMeta.propTypes = {
+  title: PropTypes.string,
+  author: PropTypes.array,
+  subjects: PropTypes.string,
+};
 
 export default BookMeta;

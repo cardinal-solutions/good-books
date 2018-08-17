@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
 const style = {
   container: { width: '100%' },
   img: { minWidth: '100%', maxWidth: '100%' },
@@ -30,4 +30,9 @@ class Thumbnail extends Component {
   }
 }
 
+Thumbnail.propTypes = {
+  coverId: PropTypes.string,
+  bookId: PropTypes.string,
+  alt: PropTypes.string,
+};
 export default withRouter(Thumbnail);
