@@ -15,10 +15,6 @@ class ListView extends Component {
     super(props);
     this.state = {};
   }
-
-  handleClick = () => {
-    console.log(this.props.bookId);
-  };
   render() {
     const { coverType, bookId, title, author } = this.props;
     return (
@@ -30,7 +26,6 @@ class ListView extends Component {
               coverType={coverType}
               bookId={bookId}
               alt={`Cover for ${title}`}
-              onClick={this.handleClick}
             />
           </Grid>
           <Grid item xs={12} sm={4}>
