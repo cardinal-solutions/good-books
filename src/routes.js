@@ -1,8 +1,8 @@
 import Home from './App';
-import Book from './views/Book';
+import Book from './views/book';
 import Search from './views/search';
-import NotFound from './views/System/NotFound';
-import ServerError from './views/System/ServerError';
+import NotFound from './views/system/NotFound';
+import ServerError from './views/system/ServerError';
 
 export default [
   {

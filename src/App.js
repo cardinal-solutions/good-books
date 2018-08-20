@@ -8,7 +8,7 @@ import teal from '@material-ui/core/colors/teal';
 import pink from '@material-ui/core/colors/pink';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import Header from './components/Header';
+import Header from './components/header';
 import './App.css';
 
 import entryRoutes from './routes';
