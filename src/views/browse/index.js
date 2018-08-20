@@ -22,7 +22,10 @@ class Browse extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const list = this.props.match.params.list;
-    if (list !== prevProps.list) {
+    if (
+      prevProps.match.params &&
+      list !== prevProps.match.params.list
+    ) {
       this.getData();
     }
   }
