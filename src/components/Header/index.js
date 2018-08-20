@@ -15,6 +15,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import MegaMenu from '../mega-menu';
 import './Header.css';
 
 const styles = {
@@ -79,9 +80,7 @@ class Header extends Component {
               className={classes.flex}>
               Good Books
             </Typography>
-            <Button component={Link} to="/" color="inherit">
-              Home
-            </Button>
+            <MegaMenu menuTitle="Browse" />
             <Button
               component={Link}
               to="/books"
