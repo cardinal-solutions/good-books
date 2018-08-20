@@ -1,13 +1,41 @@
 import React, { Component } from 'react';
+import ListView from '../../components/list-view';
+import { getSubjects } from '../../api/subjects';
 class Browse extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      works: [],
+    };
+  }
+  componentDidMount() {
+    getSubjects(this.props.match.params.list).then(
+      works => {
+        this.setState({ works });
+      }
+    );
   }
 
   render() {
-    const list = this.props.match.params.list;
-    return <div>{list}</div>;
+    const { works } = this.state;
+    return (
+      <div>
+        {works.map((work, idx) => {
+          console.log(work.authors);
+          return (
+            <ListView
+              title={work.title}
+              author={work.authors.map(
+                author => author.name
+              )}
+              coverType="olid"
+              bookId={work.cover_edition_key}
+              key={`work-${idx}`}
+            />
+          );
+        })}
+      </div>
+    );
   }
 }
 
