@@ -1,10 +1,8 @@
 export const genres = [
   'Art',
   'Comics',
-  'Biography',
   'Cookbooks',
   'Business',
-  'EBooks',
   "Children's",
   'Fantasy',
   'Christian',
@@ -27,4 +25,5 @@ export const genres = [
   'Thriller',
   'Travel',
   'Young Adult',
+  'Love',
 ];

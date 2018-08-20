@@ -9,11 +9,22 @@ class Browse extends Component {
     };
   }
   componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
     getSubjects(this.props.match.params.list).then(
       works => {
         this.setState({ works });
       }
     );
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const list = this.props.match.params.list;
+    if (list !== prevProps.list) {
+      this.getData();
+    }
   }
 
   render() {

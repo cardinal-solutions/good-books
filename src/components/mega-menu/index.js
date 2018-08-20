@@ -11,6 +11,7 @@ class MegaMenu extends Component {
     super(props);
     this.state = {
       anchorEl: null,
+      selection: '',
     };
   }
 
@@ -19,9 +20,13 @@ class MegaMenu extends Component {
   };
 
   handleClose = selection => {
-    this.props.history.push(`/browse/${selection}`);
+    const listSelection = this.changeStrCase(selection);
+    this.props.history.push(`/browse/${listSelection}`);
     this.setState({ anchorEl: null });
   };
+
+  changeStrCase = string =>
+    string.charAt(0).toLowerCase() + string.slice(1);
   render() {
     const { anchorEl } = this.state;
 
