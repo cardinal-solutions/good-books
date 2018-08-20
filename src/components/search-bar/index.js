@@ -31,6 +31,7 @@ class SearchBar extends Component {
   clear = () => {
     this.setState({ value: '' });
   };
+
   setResults = results => {
     this.setState(
       () => ({ searchResults: results }),

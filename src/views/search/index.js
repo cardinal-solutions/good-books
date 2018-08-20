@@ -29,6 +29,7 @@ const NoResults = () => (
     </ul>
   </div>
 );
+
 const SearchResults = ({ results }) => {
   return results
     .filter(
