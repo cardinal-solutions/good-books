@@ -21,7 +21,7 @@
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "lynt src/**/*.js src/*.js  --react --ignore src/tests/**/*.*",
+    "lint": "lynt src --react --ignore src/tests/**/*.*",
     "precommit": "yarn lint-staged && yarn lint"
   },
   "devDependencies": {
