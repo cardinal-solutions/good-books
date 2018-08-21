@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import ListView from '../../components/list-view';
+import BrowseGrid from '../../components/browse-grid';
 import { getSubjects } from '../../api/subjects';
 class Browse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      works: [],
+      genreList: [],
     };
   }
   componentDidMount() {
@@ -14,8 +14,8 @@ class Browse extends Component {
 
   getData = () => {
     getSubjects(this.props.match.params.list).then(
-      works => {
-        this.setState({ works });
+      genre => {
+        this.setState({ genreList: genre });
       }
     );
   };
@@ -31,23 +31,10 @@ class Browse extends Component {
   }
 
   render() {
-    const { works } = this.state;
+    const { genreList } = this.state;
     return (
       <div>
-        {works.map((work, idx) => {
-          console.log(work.authors);
-          return (
-            <ListView
-              title={work.title}
-              author={work.authors.map(
-                author => author.name
-              )}
-              coverType="olid"
-              bookId={work.cover_edition_key}
-              key={`work-${idx}`}
-            />
-          );
-        })}
+        <BrowseGrid tileData={genreList} />
       </div>
     );
   }
