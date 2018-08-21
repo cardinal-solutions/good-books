@@ -19,13 +19,14 @@ class MegaMenu extends Component {
   };
 
   handleClose = selection => {
-    const listSelection = this.changeStrCase(selection);
-    this.props.history.push(`/browse/${listSelection}`);
+    if (selection.constructor === String) {
+      this.props.history.push(`/browse/${selection}`);
+    }
     this.setState({ anchorEl: null });
   };
 
   changeStrCase = string =>
-    string.charAt(0).toLowerCase() + string.slice(1);
+    string.charAt(0).toUpperCase() + string.slice(1);
   render() {
     const { anchorEl } = this.state;
 
@@ -44,7 +45,7 @@ class MegaMenu extends Component {
             <MenuItem
               onClick={() => this.handleClose(genre)}
               key={`genre-${idx}`}>
-              {genre}
+              {this.changeStrCase(genre)}
             </MenuItem>
           ))}
         </Menu>
