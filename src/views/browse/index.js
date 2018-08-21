@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BrowseGrid from '../../components/browse-grid';
 import { getSubjects } from '../../api/subjects';
+import { Typography } from '../../../node_modules/@material-ui/core';
 class Browse extends Component {
   constructor(props) {
     super(props);
@@ -32,8 +33,17 @@ class Browse extends Component {
 
   render() {
     const { genreList } = this.state;
+
+    const genre = string =>
+      string.charAt(0).toUpperCase() + string.slice(1);
     return (
-      <div>
+      <div style={{ marginTop: '3.5em' }}>
+        <Typography
+          style={{ marginLeft: '10%' }}
+          variant="display2"
+          gutterBottom>{`Browse ${genre(
+          this.props.match.params.list
+        )} Books`}</Typography>
         <BrowseGrid tileData={genreList} />
       </div>
     );
