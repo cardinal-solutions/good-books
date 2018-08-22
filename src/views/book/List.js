@@ -120,7 +120,8 @@ class BookList extends Component {
 
     return (
       <div className={classes.root}>
-        {haveResults ? (
+        {haveResults &&
+        this.state.searchResults.length !== 0 ? (
           this.renderSearchResults()
         ) : (
           <NoResults />
