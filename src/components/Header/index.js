@@ -14,6 +14,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import MegaMenu from '../mega-menu';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
@@ -128,9 +129,7 @@ class Header extends Component {
               className={classes.flex}>
               Good Books
             </Typography>
-            <Button component={Link} to="/" color="inherit">
-              Home
-            </Button>
+            <MegaMenu menuTitle="Browse" />
             <Button
               component={Link}
               to="/books"
