@@ -67,7 +67,7 @@ class BookList extends Component {
     super(props);
     this.state = {
       searchResults: [],
-      noResults: false,
+      haveResults: false,
     };
 
     const searchString = props.match.params.searchquery;
@@ -86,9 +86,12 @@ class BookList extends Component {
       const searchString = this.props.match.params
         .searchquery;
       getSearchResults(searchString).then(results => {
-        this.setState({
-          searchResults: results,
-        });
+        this.setState(
+          {
+            searchResults: results,
+          },
+          () => this.setState({ haveResults: true })
+        );
       });
     }
   }
@@ -113,11 +116,11 @@ class BookList extends Component {
 
   render() {
     const { classes } = this.props;
-    const { searchResults } = this.state;
+    const { haveResults } = this.state;
 
     return (
       <div className={classes.root}>
-        {searchResults ? (
+        {haveResults ? (
           this.renderSearchResults()
         ) : (
           <NoResults />
