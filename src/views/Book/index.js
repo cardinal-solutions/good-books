@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   withTheme,
   withStyles,
@@ -14,7 +14,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
+// import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import { getFullBookData } from '../../api/helper';
@@ -68,9 +68,11 @@ class Book extends Component {
     const bookid = match.params.bookid;
 
     getFullBookData(bookid).then(book => {
-      let publishPlaces = book.publish_places.map(place => {
-        return place['name'];
-      });
+      let publishPlaces =
+        book.publish_places &&
+        book.publish_places.map(place => {
+          return place['name'];
+        });
 
       let authors = book.authors.map(author => {
         return (
@@ -85,14 +87,18 @@ class Book extends Component {
         authors,
         key: book.key,
         classifications: {
-          dewey:
-            book.classifications.dewey_decimal_class[0],
-          lc: book.classifications.lc_classifications[0],
+          dewey: book.classifications
+            ? book.classifications.dewey_decimal_class[0]
+            : 'not found',
+          lc: book.classifications
+            ? book.classifications.lc_classifications[0]
+            : 'not found',
         },
         cover: book.cover.large,
         pages: book.number_of_pages,
         publishDate: book.publish_date,
-        publishPlaces: publishPlaces.join(', '),
+        publishPlaces:
+          publishPlaces && publishPlaces.join(', '),
         title: book.title,
       });
 

@@ -1,5 +1,6 @@
 import Home from './App';
 import Book from './views/book';
+import BookList from './views/book/List';
 import Search from './views/search';
 import NotFound from './views/system/NotFound';
 import ServerError from './views/system/ServerError';
@@ -14,6 +15,10 @@ export default [
     path: '/search',
     exact: true,
     component: Search,
+  },
+  {
+    path: '/search/:searchquery',
+    component: BookList,
   },
   {
     path: '/book/:bookid',
