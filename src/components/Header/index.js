@@ -9,7 +9,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -116,7 +115,7 @@ class Header extends Component {
 
   render() {
     const { classes } = this.props;
-    const { anchorEl, showSearchInput } = this.state;
+    const { anchorEl } = this.state;
     //   @todo: <Searchbar /> and its state needs to be lifted here to manage programmtic routing to /search
 
     return (

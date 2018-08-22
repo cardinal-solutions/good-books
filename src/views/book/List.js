@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   withTheme,
   withStyles,
 } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
-import { getFullBookData } from '../../api/helper';
 import { getSearchResults } from '../../api/search';
 import ListView from '../../components/list-view';
 
@@ -127,8 +115,7 @@ class BookList extends Component {
   };
 
   render() {
-    const { classes, match } = this.props;
-    const { searchResults, noResults } = this.state;
+    const { classes } = this.props;
 
     return (
       <div className={classes.root}>
