@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
   withTheme,
   withStyles,
@@ -15,6 +15,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import MegaMenu from '../mega-menu';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Search from '@material-ui/icons/Search';
+
 import './Header.css';
 
 const styles = {
@@ -53,6 +57,8 @@ class Header extends Component {
     super(props);
     this.state = {
       anchorEl: null,
+      searchValue: '',
+      // showSearchInput: false,
     };
   }
 
@@ -62,6 +68,50 @@ class Header extends Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
+  };
+
+  handleChange = event => {
+    this.setState({ searchValue: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    console.log('searchValue: ', this.state.searchValue);
+    const formatSearchString = this.state.searchValue.replace(
+      / /g,
+      '+'
+    );
+    this.props.history.push(
+      `/search/${formatSearchString}`
+    );
+    this.setState({ searchValue: '' });
+  };
+
+  renderSearch = () => {
+    return (
+      <form role="search" onSubmit={this.handleSubmit}>
+        <Grid container spacing={8} alignItems="flex-end">
+          <Grid item>
+            <Search />
+          </Grid>
+          <Grid item>
+            <TextField
+              id="input-with-icon-grid"
+              label="Search Books..."
+              value={this.state.searchValue}
+              onChange={this.handleChange}
+            />
+          </Grid>
+        </Grid>
+      </form>
+    );
+  };
+
+  toggleSearch = () => {
+    this.setState({
+      showSearchInput: !this.state.showSearchInput,
+    });
   };
 
   render() {
@@ -85,7 +135,7 @@ class Header extends Component {
               to="/books"
               variant="outlined"
               color="inherit">
-              Books
+              Browse
             </Button>
             <Button
               component={Link}
@@ -93,6 +143,9 @@ class Header extends Component {
               color="inherit">
               Search
             </Button>
+
+            {this.renderSearch()}
+
             <IconButton
               className={classes.menuButton}
               color="inherit"
@@ -129,7 +182,9 @@ class Header extends Component {
   }
 }
 
-export default withTheme()(withStyles(styles)(Header));
+export default withTheme()(
+  withStyles(styles)(withRouter(Header))
+);
 /* notes:
   export default withTheme()(withStyles(styles)(Modal));
 
