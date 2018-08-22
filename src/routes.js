@@ -29,12 +29,6 @@ export default [
     component: Book,
     exact: true,
   },
-  /* @TODO add browse
-  {
-    path: '/browse/:topic',
-    component: Browse,
-  }
-  */
   {
     path: '/500',
     exact: true,
