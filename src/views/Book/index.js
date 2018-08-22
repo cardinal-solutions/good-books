@@ -68,13 +68,13 @@ class Book extends Component {
     const bookid = match.params.bookid;
 
     getFullBookData(bookid).then(book => {
-      let publishPlaces =
+      const publishPlaces =
         book.publish_places &&
         book.publish_places.map(place => {
           return place['name'];
         });
 
-      let authors = book.authors.map(author => {
+      const authors = book.authors.map(author => {
         return (
           <a href={author.url} key={author.name}>
             {author.name}
@@ -87,10 +87,10 @@ class Book extends Component {
         authors,
         key: book.key,
         classifications: {
-          dewey: book.classifications
+          dewey: book.classifications.dewey_decimal_class
             ? book.classifications.dewey_decimal_class[0]
             : 'not found',
-          lc: book.classifications
+          lc: book.classifications.lc_classifications
             ? book.classifications.lc_classifications[0]
             : 'not found',
         },

@@ -116,12 +116,11 @@ class BookList extends Component {
 
   render() {
     const { classes } = this.props;
-    const { haveResults } = this.state;
+    const { haveResults, searchResults } = this.state;
 
     return (
       <div className={classes.root}>
-        {haveResults &&
-        this.state.searchResults.length !== 0 ? (
+        {haveResults && searchResults.length !== 0 ? (
           this.renderSearchResults()
         ) : (
           <NoResults />
