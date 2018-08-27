@@ -33,10 +33,22 @@ class SuggestedBooks extends Component {
     };
   }
 
+  componentDidUpdate(nextProps) {
+    if (
+      nextProps.match.params.bookid !==
+      this.props.match.params.bookid
+    ) {
+      this.getBookData();
+    }
+  }
+
   componentDidMount = () => {
+    this.getBookData();
+  };
+
+  getBookData() {
     const { match } = this.props;
     const bookid = match.params.bookid;
-
     getBookAuthors(bookid).then(authors => {
       console.log('authors: ', authors);
 
@@ -63,7 +75,7 @@ class SuggestedBooks extends Component {
         this.setState({ books });
       });
     });
-  };
+  }
 
   render() {
     const { classes } = this.props;
