@@ -15,6 +15,7 @@ class Thumbnail extends Component {
   onClick = bookId => {
     this.props.history.push(`/book/OLID:${bookId}`);
   };
+
   render() {
     const { coverType, bookId, alt } = this.props;
     return (
@@ -35,4 +36,5 @@ Thumbnail.propTypes = {
   bookId: PropTypes.string,
   alt: PropTypes.string,
 };
+
 export default withRouter(Thumbnail);
