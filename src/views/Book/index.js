@@ -17,6 +17,8 @@ import TableCell from '@material-ui/core/TableCell';
 // import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import SuggestedBooks from '../../components/suggested';
+
 import { getFullBookData } from '../../api/helper';
 
 import './Book.css';
@@ -60,10 +62,26 @@ class Book extends Component {
       publishPlaces: '',
       title: '',
       book: {},
+      subjects: [],
     };
   }
 
+  componentDidUpdate(nextProps) {
+    console.log('params: ', nextProps.match.params.bookid);
+    console.log('params: ', this.props.match.params);
+    if (
+      nextProps.match.params.bookid !==
+      this.props.match.params.bookid
+    ) {
+      this.getBook();
+    }
+  }
+
   componentDidMount = () => {
+    this.getBook();
+  };
+
+  getBook() {
     const { match } = this.props;
     const bookid = match.params.bookid;
 
@@ -72,6 +90,12 @@ class Book extends Component {
         book.publish_places &&
         book.publish_places.map(place => {
           return place['name'];
+        });
+
+      const subjects =
+        book.subjects &&
+        book.subjects.map(subject => {
+          return subject.name;
         });
 
       const authors = book.authors.map(author => {
@@ -104,11 +128,12 @@ class Book extends Component {
         publishPlaces:
           publishPlaces && publishPlaces.join(', '),
         title: book.title,
+        subjects: subjects && subjects.join(', '),
       });
 
       console.log(book);
     });
-  };
+  }
 
   render() {
     const { classes, match } = this.props;
@@ -122,6 +147,7 @@ class Book extends Component {
       publishPlaces,
       title,
       book,
+      subjects,
     } = this.state;
     return (
       <div className={classes.root}>
@@ -189,10 +215,16 @@ class Book extends Component {
                   <TableCell>Publish Place(s)</TableCell>
                   <TableCell>{publishPlaces}</TableCell>
                 </TableRow>
+                <TableRow>
+                  <TableCell>Subject(s)</TableCell>
+                  <TableCell>{subjects}</TableCell>
+                </TableRow>
               </TableBody>
             </Table>
           </Grid>
         </Grid>
+
+        <SuggestedBooks />
       </div>
     );
   }
