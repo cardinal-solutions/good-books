@@ -87,12 +87,16 @@ class Book extends Component {
         authors,
         key: book.key,
         classifications: {
-          dewey: book.classifications.dewey_decimal_class
-            ? book.classifications.dewey_decimal_class[0]
-            : 'not found',
-          lc: book.classifications.lc_classifications
-            ? book.classifications.lc_classifications[0]
-            : 'not found',
+          dewey:
+            book.classifications &&
+            book.classifications.dewey_decimal_class
+              ? book.classifications.dewey_decimal_class[0]
+              : 'not found',
+          lc:
+            book.classifications &&
+            book.classifications.lc_classifications
+              ? book.classifications.lc_classifications[0]
+              : 'not found',
         },
         cover: book.cover.large,
         pages: book.number_of_pages,
