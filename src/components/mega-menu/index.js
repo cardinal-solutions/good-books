@@ -5,6 +5,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import { genres } from './genres';
+
+import './mega-menu.css';
+
 class MegaMenu extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +34,7 @@ class MegaMenu extends Component {
     const { anchorEl } = this.state;
 
     return (
-      <div>
+      <div className="MegaMenu">
         <Button onClick={this.handleClick}>
           {this.props.menuTitle}
           <ArrowDropDown />

@@ -6,13 +6,11 @@ import {
 } from '@material-ui/core/styles';
 
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 
 import MegaMenu from '../mega-menu';
 import TextField from '@material-ui/core/TextField';
@@ -29,25 +27,19 @@ const styles = {
     display: 'flex',
     flexGrow: 1,
     justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   menuButton: {},
+  search: {
+    cursor: 'pointer',
+  },
 };
 
 const options = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
+  {
+    title: 'Advance Search',
+    url: '/search',
+  },
 ];
 
 const ITEM_HEIGHT = 48;
@@ -58,15 +50,19 @@ class Header extends Component {
     this.state = {
       anchorEl: null,
       searchValue: '',
-      // showSearchInput: false,
+      showSearchInput: false,
     };
   }
 
   handleClick = event => {
+    console.log(event.currentTarget);
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
+  handleClose = selection => {
+    if (selection.constructor === String) {
+      this.props.history.push(selection);
+    }
     this.setState({ anchorEl: null });
   };
 
@@ -77,7 +73,6 @@ class Header extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    console.log('searchValue: ', this.state.searchValue);
     const formatSearchString = this.state.searchValue.replace(
       / /g,
       '+'
@@ -89,20 +84,32 @@ class Header extends Component {
   };
 
   renderSearch = () => {
+    const { showSearchInput } = this.state;
     return (
-      <form role="search" onSubmit={this.handleSubmit}>
-        <Grid container spacing={8} alignItems="flex-end">
-          <Grid item>
+      <form
+        role="search"
+        autoComplete="off"
+        onSubmit={this.handleSubmit}>
+        <Grid container alignItems="center" spacing={16}>
+          <Grid
+            item
+            onClick={() => this.toggleSearch()}
+            className={this.props.classes.search}>
             <Search />
           </Grid>
-          <Grid item>
-            <TextField
-              id="input-with-icon-grid"
-              label="Search Books..."
-              value={this.state.searchValue}
-              onChange={this.handleChange}
-            />
-          </Grid>
+          {showSearchInput ? (
+            <Grid item>
+              <TextField
+                id="Search"
+                label="Search Book"
+                value={this.state.searchValue}
+                onChange={this.handleChange}
+                margin="normal"
+              />
+            </Grid>
+          ) : (
+            ''
+          )}
         </Grid>
       </form>
     );
@@ -121,30 +128,23 @@ class Header extends Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className="Header">
           <Toolbar>
-            <Typography
-              variant="title"
-              color="inherit"
-              className={classes.flex}>
-              Good Books
-            </Typography>
-            <MegaMenu menuTitle="Browse" />
-            <Button
-              component={Link}
-              to="/books"
-              variant="outlined"
-              color="inherit">
-              Browse
-            </Button>
-            <Button
+            <div className={classes.flex}>
+              <Link to="/">
+                <div className="logo">GB</div>
+              </Link>
+              {this.renderSearch()}
+            </div>
+
+            {/* <Button
               component={Link}
               to="/search"
               color="inherit">
               Search
-            </Button>
+            </Button> */}
 
-            {this.renderSearch()}
+            <MegaMenu menuTitle="Browse" />
 
             <IconButton
               className={classes.menuButton}
@@ -168,10 +168,11 @@ class Header extends Component {
               }}>
               {options.map(option => (
                 <MenuItem
-                  key={option}
-                  selected={option === 'Pyxis'}
-                  onClick={this.handleClose}>
-                  {option}
+                  key={option.title}
+                  onClick={() =>
+                    this.handleClose(option.url)
+                  }>
+                  {option.title}
                 </MenuItem>
               ))}
             </Menu>
