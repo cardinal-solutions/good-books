@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+// import CardMedia from '@material-ui/core/CardMedia';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -18,6 +18,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import SuggestedBooks from '../../components/suggested';
+import Thumbnail from '../../components/Thumbnail';
 
 import { getFullBookData } from '../../api/helper';
 
@@ -140,7 +141,7 @@ class Book extends Component {
     const {
       authors,
       classifications,
-      cover,
+      // cover,
       key,
       pages,
       publishDate,
@@ -149,15 +150,24 @@ class Book extends Component {
       book,
       subjects,
     } = this.state;
+
     return (
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={4}>
             <Card className={classes.card}>
-              <CardMedia
+              {/* <CardMedia
                 className={classes.media}
                 image={cover}
                 title={title}
+              /> */}
+              <Thumbnail
+                custom
+                coverType="OLID"
+                bookId={match.params.bookid
+                  .split(':')
+                  .pop()}
+                alt={`Cover for ${title}`}
               />
               <CardContent>
                 <strong>{match.params.bookid}</strong>
