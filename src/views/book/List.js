@@ -67,7 +67,7 @@ class BookList extends Component {
     super(props);
     this.state = {
       searchResults: [],
-      haveResults: false,
+      haveResults: true,
     };
 
     const searchString = props.match.params.searchquery;
