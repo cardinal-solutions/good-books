@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import placeholder from '../../img/placeholder.png';
 const style = {
   container: { width: '100%' },
   img: { minWidth: '100%', maxWidth: '100%' },
@@ -18,11 +19,15 @@ class Thumbnail extends Component {
 
   render() {
     const { coverType, bookId, alt } = this.props;
+    const src =
+      bookId === undefined || null
+        ? placeholder
+        : `http://covers.openlibrary.org/b/${coverType}/${bookId}-L.jpg`;
     return (
       <div style={style.container}>
         <img
           style={style.img}
-          src={`http://covers.openlibrary.org/b/${coverType}/${bookId}-L.jpg`}
+          src={src}
           alt={alt}
           onClick={() => this.onClick(bookId)}
         />
