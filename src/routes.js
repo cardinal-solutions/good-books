@@ -1,4 +1,4 @@
-import Home from './App';
+import Home from './views/home';
 import Book from './views/book';
 import BookList from './views/book/List';
 import Search from './views/search';
