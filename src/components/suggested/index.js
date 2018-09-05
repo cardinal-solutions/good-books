@@ -49,6 +49,7 @@ class SuggestedBooks extends Component {
   getBookData() {
     const { match } = this.props;
     const bookid = match.params.bookid;
+
     getBookAuthors(bookid).then(authors => {
       console.log('authors: ', authors);
 
