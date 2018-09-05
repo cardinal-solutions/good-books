@@ -67,7 +67,7 @@ class BookList extends Component {
     super(props);
     this.state = {
       searchResults: [],
-      haveResults: false,
+      haveResults: true,
     };
 
     const searchString = props.match.params.searchquery;
@@ -99,19 +99,15 @@ class BookList extends Component {
   renderSearchResults = () => {
     const results = this.state.searchResults;
 
-    return results
-      .filter(
-        result => result.cover_edition_key !== undefined
-      )
-      .map((book, id) => (
-        <ListView
-          title={book.title_suggest}
-          author={book.author_name}
-          coverType="olid"
-          bookId={book.cover_edition_key}
-          key={`book-${id}`}
-        />
-      ));
+    return results.map((book, id) => (
+      <ListView
+        title={book.title_suggest}
+        author={book.author_name}
+        coverType="olid"
+        bookId={book.cover_edition_key}
+        key={`book-${id}`}
+      />
+    ));
   };
 
   render() {
