@@ -5,35 +5,19 @@ import {
   withTheme,
   withStyles,
 } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-// // import CardMedia from '@material-ui/core/CardMedia';
+import BookMetaTable from './BookMetaTable';
 
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-
-// import SuggestedBooks from '../../components/suggested';
+import SuggestedBooks from '../../components/suggested';
 import Thumbnail from '../../components/Thumbnail';
 import { getBook } from '../../api/book';
-// import { getFullBookData } from '../../api/helper';
-
-import './Book.css';
-
-// const bookID = 'ISBN:0385472579';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     padding: 24,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'left',
   },
   card: {
     maxWidth: '100%',
@@ -42,16 +26,13 @@ const styles = theme => ({
     height: 0,
     paddingTop: '100%',
   },
-  table: {
-    marginTop: 48,
-  },
 });
 
 class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      book: {},
+      book: null,
     };
   }
 
@@ -82,33 +63,37 @@ class Book extends Component {
   render() {
     const { classes, match } = this.props;
     const { book } = this.state;
-
+    console.log(book);
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={4}>
-            <Card className={classes.card}>
-              <Thumbnail
-                custom
-                coverType="OLID"
-                bookId={match.params.bookid
-                  .split(':')
-                  .pop()}
-                alt={`Cover for ${book.title}`}
-              />
-              <CardContent>
-                <strong>{match.params.bookid}</strong>
-              </CardContent>
-            </Card>
-          </Grid>
+        {book ? (
+          <div>
+            <Grid container spacing={24}>
+              <Grid item xs={4}>
+                <Card className={classes.card}>
+                  <Thumbnail
+                    custom
+                    coverType="OLID"
+                    bookId={match.params.bookid
+                      .split(':')
+                      .pop()}
+                    alt={`Cover for ${book.title}`}
+                  />
+                  <CardContent>
+                    <strong>{match.params.bookid}</strong>
+                  </CardContent>
+                </Card>
+              </Grid>
 
-          <Grid item xs={8}>
-            <Paper className={classes.paper}>
-              <h1>{book.title}</h1>
-              {book.subtitle}
-            </Paper>
-          </Grid>
-        </Grid>
+              <Grid item xs={8}>
+                <BookMetaTable book={book} />
+              </Grid>
+            </Grid>
+            <SuggestedBooks />
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     );
   }
