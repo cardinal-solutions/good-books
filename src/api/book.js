@@ -1,7 +1,11 @@
 const baseUrl = 'https://openlibrary.org/api/';
 
-export const getBook = bookID => {
-  return get(`books?bibkeys=${bookID}&format=json`);
+export const getBook = bookid => {
+  return fetch(
+    `https://openlibrary.org/api/books?bibkeys=${bookid}&format=json&jscmd=data`
+  ).then(response => {
+    return response.json();
+  });
 };
 
 export const getBookFullData = bookID => {
@@ -21,14 +25,3 @@ const onSuccess = response => {
 const onError = error => {
   console.log(error); // eslint-disable-line no-console
 };
-
-// export const getBookFullData = bookID => {
-//   return fetch(`${baseUrl}books?bibkeys=${bookID}&format=json&jscmd=data`)
-//     .then(response => {
-//       console.log(response)
-//       return response.json();
-//     })
-//     .then(error => {
-//       console.log(error);
-//     });
-// };
