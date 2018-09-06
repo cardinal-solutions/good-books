@@ -36,7 +36,6 @@ const styles = theme => ({
 
 const SingleLineGridList = ({ tileData, ...props }) => {
   const { classes, history } = props;
-  console.log('history: ', history);
 
   return (
     <div className={classes.root}>

@@ -17,7 +17,6 @@ class Browse extends Component {
   getData = () => {
     getSubjects(this.props.match.params.list).then(
       genre => {
-        console.log('genre: ', genre);
         this.setState({ genreList: genre });
       }
     );
