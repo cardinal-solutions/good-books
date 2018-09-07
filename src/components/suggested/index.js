@@ -75,7 +75,10 @@ class SuggestedBooks extends Component {
         });
 
         getSubjects(
-          subjects[0].name.split(' ').join('_')
+          subjects[0].name
+            .split(' ')
+            .join('_')
+            .toLowerCase()
         ).then(books => {
           this.setState({ books });
         });
