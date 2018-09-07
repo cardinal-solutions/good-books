@@ -35,14 +35,14 @@ const styles = theme => ({
 });
 
 const SingleLineGridList = ({ tileData, ...props }) => {
-  const { classes, history } = props;
+  const { classes, history, side } = props;
 
   return (
     <div className={classes.root}>
       <GridList
         className={classes.gridList}
         cellHeight="auto"
-        cols={8.5}>
+        cols={side ? 3.5 : 8.5}>
         {tileData.map(data => (
           <GridListTile
             key={data.title}
