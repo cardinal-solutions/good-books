@@ -2,11 +2,34 @@ import React, { Component } from 'react';
 import BrowseGrid from '../../components/browse-grid';
 import { getSubjects } from '../../api/subjects';
 import { Typography } from '../../../node_modules/@material-ui/core';
+
+import {
+  withTheme,
+  withStyles,
+} from '@material-ui/core/styles';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  pageTitle: {
+    padding: 24,
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+});
+
 class Browse extends Component {
   constructor(props) {
     super(props);
     this.state = {
       genreList: [],
+      filterNullThumbnails: false,
     };
   }
 
@@ -32,23 +55,53 @@ class Browse extends Component {
     }
   }
 
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.checked });
+  };
+
   render() {
-    const { genreList } = this.state;
+    const { classes } = this.props;
+    const { genreList, filterNullThumbnails } = this.state;
 
     const genre = string =>
       string.charAt(0).toUpperCase() + string.slice(1);
+
     return (
-      <div style={{ marginTop: '3.5em' }}>
-        <Typography
-          style={{ marginLeft: '10%' }}
-          variant="display2"
-          gutterBottom>{`Browse ${genre(
-          this.props.match.params.list
-        )} Books`}</Typography>
-        <BrowseGrid tileData={genreList} />
+      <div className={classes.root}>
+        <div className={classes.pageTitle}>
+          <Typography variant="display1" gutterBottom>
+            {`Browse ${genre(
+              this.props.match.params.list
+            )} Books`}
+          </Typography>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.state.filterNullThumbnails}
+                  onChange={this.handleChange(
+                    'filterNullThumbnails'
+                  )}
+                  value="filterNullThumbnails"
+                />
+              }
+              label="Remove Blank Covers"
+            />
+          </FormGroup>
+        </div>
+
+        {filterNullThumbnails ? (
+          <BrowseGrid
+            tileData={genreList.filter(
+              genre => genre.cover_id !== null
+            )}
+          />
+        ) : (
+          <BrowseGrid tileData={genreList} />
+        )}
       </div>
     );
   }
 }
 
-export default Browse;
+export default withTheme()(withStyles(styles)(Browse));
