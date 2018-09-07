@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {
+  withTheme,
+  withStyles,
+} from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+
+import SuggestedBooks from '../../components/suggested';
 
 // import Typography from '@material-ui/core/Typography';
 // import Divider from '@material-ui/core/Divider';
@@ -14,6 +19,14 @@ const styles = theme => ({
     flexWrap: 'wrap',
     flexGrow: 1,
   },
+  hero: {
+    height: 350,
+    flexGrow: 1,
+    backgroundColor: theme.palette.grey[300],
+  },
+  body: {
+    padding: 24,
+  },
   paper: {
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
@@ -22,33 +35,40 @@ const styles = theme => ({
 });
 
 class Home extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   render() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
+    console.log(theme);
     return (
-      <div style={styles.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>xs=12</Paper>
+      <div className={classes.root}>
+        <Grid container>
+          <Grid item className={classes.hero} />
+        </Grid>
+        <Grid
+          container
+          spacing={24}
+          className={classes.body}>
+          <Grid item xs={8}>
+            <SuggestedBooks topic="fiction" />
+            <SuggestedBooks topic="non-fiction" />
           </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>xs=6</Paper>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              <SuggestedBooks topic="history" sidePanel />
+            </Paper>
           </Grid>
-          <Grid item xs={6}>
-            <Paper className={classes.paper}>xs=6</Paper>
+          <Grid item xs={4}>
+            {/* <Paper className={classes.paper}>xs=3</Paper> */}
           </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
+          <Grid item xs={4}>
+            {/* <Paper className={classes.paper}>xs=3</Paper> */}
           </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
-          </Grid>
-          <Grid item xs={3}>
-            <Paper className={classes.paper}>xs=3</Paper>
+          <Grid item xs={4}>
+            {/* <Paper className={classes.paper}>xs=3</Paper> */}
           </Grid>
         </Grid>
       </div>
@@ -56,4 +76,4 @@ class Home extends Component {
   }
 }
 
-export default withStyles(styles)(Home);
+export default withTheme()(withStyles(styles)(Home));

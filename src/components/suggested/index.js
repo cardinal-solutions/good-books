@@ -20,6 +20,7 @@ import './SuggestedBooks.css';
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    marginBottom: 64,
   },
 });
 
@@ -47,42 +48,52 @@ class SuggestedBooks extends Component {
   };
 
   getBookData() {
-    const { match } = this.props;
-    const bookid = match.params.bookid;
+    const { match, topic } = this.props;
 
-    getBookAuthors(bookid).then(authors => {
-      const authorsList = authors.map(author => {
-        return (
-          <a href={author.url} key={author.name}>
-            {author.name}
-          </a>
-        );
-      });
-
-      this.setState({ authors: authorsList });
-    });
-
-    getBookSubjects(bookid).then(subjects => {
-      this.setState({
-        subjects,
-      });
-
-      getSubjects(
-        subjects[0].name.split(' ').join('_')
-      ).then(books => {
+    if (topic !== '') {
+      getSubjects(topic).then(books => {
         this.setState({ books });
       });
-    });
+    } else {
+      const bookid = match.params.bookid;
+
+      getBookAuthors(bookid).then(authors => {
+        const authorsList = authors.map(author => {
+          return (
+            <a href={author.url} key={author.name}>
+              {author.name}
+            </a>
+          );
+        });
+
+        this.setState({ authors: authorsList });
+      });
+
+      getBookSubjects(bookid).then(subjects => {
+        this.setState({
+          subjects,
+        });
+
+        getSubjects(
+          subjects[0].name.split(' ').join('_')
+        ).then(books => {
+          this.setState({ books });
+        });
+      });
+    }
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, topic, sidePanel } = this.props;
     const { books } = this.state;
 
     return (
       <div className={`Suggested ${classes.root}`}>
-        <h2>Suggested Books</h2>
-        <SingleLineGridList tileData={books} />
+        <h2>Suggested books {topic && `in ${topic}.`}</h2>
+        <SingleLineGridList
+          tileData={books}
+          side={sidePanel}
+        />
       </div>
     );
   }
@@ -91,10 +102,14 @@ class SuggestedBooks extends Component {
 SuggestedBooks.propTypes = {
   match: PropTypes.object,
   classes: PropTypes.object.isRequired,
+  topic: PropTypes.string,
+  sidePanel: PropTypes.bool,
 };
 
 SuggestedBooks.defaultProps = {
   match: {},
+  topic: '',
+  sidePanel: false,
 };
 
 export default withTheme()(
