@@ -51,8 +51,6 @@ class SuggestedBooks extends Component {
     const bookid = match.params.bookid;
 
     getBookAuthors(bookid).then(authors => {
-      console.log('authors: ', authors);
-
       const authorsList = authors.map(author => {
         return (
           <a href={author.url} key={author.name}>
@@ -65,7 +63,6 @@ class SuggestedBooks extends Component {
     });
 
     getBookSubjects(bookid).then(subjects => {
-      console.log('subjects: ', subjects);
       this.setState({
         subjects,
       });
