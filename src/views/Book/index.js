@@ -67,7 +67,7 @@ class Book extends Component {
       arr.push(element.name)
     );
     this.setState({
-      topic: arr[0],
+      topic: arr[Math.floor(Math.random() * arr.length)],
     });
   };
 
