@@ -22,8 +22,6 @@ class SuggestedBooks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      authors: '',
-      subject: this.props.topic,
       books: null,
     };
   }

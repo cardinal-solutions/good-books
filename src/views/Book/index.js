@@ -46,13 +46,11 @@ class Book extends Component {
   }
 
   componentDidMount = () => {
-    console.log(this.props.match.params.bookid);
     this.setBook();
   };
 
   setBook() {
     const id = this.props.match.params.bookid;
-    console.log(id);
     getBook(id).then(book => {
       const thisBook = Object.keys(book)[0];
       this.setState(
