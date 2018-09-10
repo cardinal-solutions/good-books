@@ -42,9 +42,11 @@ class Browse extends Component {
         <Typography
           style={{ marginLeft: '10%' }}
           variant="display2"
-          gutterBottom>{`Browse ${genre(
-          this.props.match.params.list
-        )} Books`}</Typography>
+          gutterBottom>
+          {`Browse ${genre(
+            this.props.match.params.list
+          )} Books`}
+        </Typography>
         <BrowseGrid tileData={genreList} />
       </div>
     );

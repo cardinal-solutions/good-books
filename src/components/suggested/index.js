@@ -8,14 +8,8 @@ import {
 import SingleLineGridList from '../../components/single-line-grid-list';
 
 import { getSubjects } from '../../api/subjects';
-import {
-  getBookAuthors,
-  getBookSubjects,
-} from '../../api/helper';
 
 import './SuggestedBooks.css';
-
-// const bookID = 'ISBN:0385472579';
 
 const styles = theme => ({
   root: {
@@ -29,69 +23,47 @@ class SuggestedBooks extends Component {
     super(props);
     this.state = {
       authors: '',
-      subjects: [],
-      books: [],
+      subject: this.props.topic,
+      books: null,
     };
   }
 
-  componentDidUpdate(nextProps) {
-    if (
-      nextProps.match.params.bookid !==
-      this.props.match.params.bookid
-    ) {
-      this.getBookData();
+  componentDidUpdate = prevProps => {
+    if (this.props.topic !== prevProps.topic) {
+      getSubjects(this.props.topic).then(data =>
+        this.setBooks(data)
+      );
     }
-  }
-
-  componentDidMount = () => {
-    this.getBookData();
   };
 
-  getBookData() {
-    const { match, topic } = this.props;
-
-    if (topic !== '') {
-      getSubjects(topic).then(books => {
-        this.setState({ books });
-      });
-    } else {
-      const bookid = match.params.bookid;
-
-      getBookAuthors(bookid).then(authors => {
-        const authorsList = authors.map(author => {
-          return (
-            <a href={author.url} key={author.name}>
-              {author.name}
-            </a>
-          );
-        });
-
-        this.setState({ authors: authorsList });
-      });
-
-      getBookSubjects(bookid).then(subjects => {
-        this.setState({
-          subjects,
-        });
-
-        getSubjects(subjects[0].name).then(books => {
-          this.setState({ books });
-        });
-      });
-    }
+  componentDidMount() {
+    getSubjects(this.props.topic).then(books => {
+      this.setBooks(books);
+    });
   }
+
+  setBooks = list => {
+    this.setState({
+      books: list,
+    });
+  };
 
   render() {
     const { classes, topic, sidePanel } = this.props;
     const { books } = this.state;
-
     return (
       <div className={`Suggested ${classes.root}`}>
-        <h2>Suggested books {topic && `in ${topic}.`}</h2>
-        <SingleLineGridList
-          tileData={books}
-          side={sidePanel}
-        />
+        {books && (
+          <div>
+            <h2>
+              Suggested books {topic && `in ${topic}.`}
+            </h2>
+            <SingleLineGridList
+              tileData={books}
+              side={sidePanel}
+            />
+          </div>
+        )}
       </div>
     );
   }
