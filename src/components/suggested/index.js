@@ -37,9 +37,11 @@ class SuggestedBooks extends Component {
   };
 
   componentDidMount() {
-    getSubjects(this.props.topic).then(books => {
-      this.setBooks(books);
-    });
+    if (this.props.topic) {
+      getSubjects(this.props.topic).then(books => {
+        this.setBooks(books);
+      });
+    }
   }
 
   setBooks = list => {
