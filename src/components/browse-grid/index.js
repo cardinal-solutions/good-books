@@ -31,8 +31,7 @@ const BrowseGrid = ({ listTitle, tileData, ...props }) => {
       <GridList
         className={classes.gridList}
         cellHeight="auto"
-        cols={4}
-        key={tileData[0] && tileData[0].cover_id}>
+        cols={4}>
         {tileData.map(data => (
           <GridListTile key={data.cover_edition_key}>
             <Thumbnail
