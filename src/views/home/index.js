@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import SuggestedBooks from '../../components/suggested';
-
+import { genres } from '../../genre-list';
 // import Typography from '@material-ui/core/Typography';
 // import Divider from '@material-ui/core/Divider';
 
@@ -41,8 +41,10 @@ class Home extends Component {
   }
 
   render() {
-    const { classes, theme } = this.props;
-    console.log(theme);
+    const { classes } = this.props;
+    const random = items =>
+      items[Math.floor(Math.random() * items.length)];
+
     return (
       <div className={classes.root}>
         <Grid container>
@@ -53,22 +55,16 @@ class Home extends Component {
           spacing={24}
           className={classes.body}>
           <Grid item xs={8}>
-            <SuggestedBooks topic="fiction" />
-            <SuggestedBooks topic="non-fiction" />
+            <SuggestedBooks topic={random(genres)} />
+            <SuggestedBooks topic={random(genres)} />
           </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper}>
-              <SuggestedBooks topic="history" sidePanel />
+              <SuggestedBooks
+                topic={random(genres)}
+                sidePanel
+              />
             </Paper>
-          </Grid>
-          <Grid item xs={4}>
-            {/* <Paper className={classes.paper}>xs=3</Paper> */}
-          </Grid>
-          <Grid item xs={4}>
-            {/* <Paper className={classes.paper}>xs=3</Paper> */}
-          </Grid>
-          <Grid item xs={4}>
-            {/* <Paper className={classes.paper}>xs=3</Paper> */}
           </Grid>
         </Grid>
       </div>

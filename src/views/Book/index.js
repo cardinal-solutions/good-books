@@ -50,20 +50,30 @@ class Book extends Component {
   };
 
   setBook() {
-    const { match } = this.props;
-    const bookid = match.params.bookid;
-    getBook(bookid).then(book => {
+    const id = this.props.match.params.bookid;
+    getBook(id).then(book => {
       const thisBook = Object.keys(book)[0];
-      this.setState({
-        book: book[thisBook],
-      });
+      this.setState(
+        () => ({ book: book[thisBook] }),
+        () => this.setSubjects(this.state.book)
+      );
     });
   }
+  setSubjects = test => {
+    const arr = [];
+    Object.values(test.subjects).forEach(element =>
+      arr.push(element.name)
+    );
+    this.setState({
+      topic: arr[Math.floor(Math.random() * arr.length)],
+    });
+  };
 
   render() {
-    const { classes, match } = this.props;
-    const { book } = this.state;
-    console.log(book);
+    const { classes } = this.props;
+    const { book, topic } = this.state;
+    const id = this.props.match.params.bookid;
+
     return (
       <div className={classes.root}>
         {book ? (
@@ -74,13 +84,11 @@ class Book extends Component {
                   <Thumbnail
                     custom
                     coverType="OLID"
-                    bookId={match.params.bookid
-                      .split(':')
-                      .pop()}
+                    bookId={id.split(':').pop()}
                     alt={`Cover for ${book.title}`}
                   />
                   <CardContent>
-                    <strong>{match.params.bookid}</strong>
+                    <strong>{id}</strong>
                   </CardContent>
                 </Card>
               </Grid>
@@ -89,7 +97,7 @@ class Book extends Component {
                 <BookMetaTable book={book} />
               </Grid>
             </Grid>
-            <SuggestedBooks />
+            <SuggestedBooks topic={topic} />
           </div>
         ) : (
           <div>Loading...</div>
@@ -100,13 +108,10 @@ class Book extends Component {
 }
 
 Book.propTypes = {
-  match: PropTypes.object,
   classes: PropTypes.object.isRequired,
 };
 
-Book.defaultProps = {
-  match: {},
-};
+Book.defaultProps = {};
 
 export default withTheme()(
   withStyles(styles)(withRouter(Book))
