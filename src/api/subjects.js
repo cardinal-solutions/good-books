@@ -11,5 +11,8 @@ export const getSubjects = subject => {
     .then(checkStatus)
     .then(data => {
       return data.works;
+    })
+    .catch(error => {
+      throw Error(error);
     });
 };

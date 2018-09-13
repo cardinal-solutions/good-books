@@ -7,6 +7,8 @@ import {
 } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import BookMetaTable from './BookMetaTable';
 
@@ -82,7 +84,14 @@ class Book extends Component {
     const id = this.props.match.params.bookid;
 
     if (this.state.error) {
-      return <h1>Not found</h1>;
+      return (
+        <div>
+          <Typography variant="display3">
+            {`Sorry, we couldn't find this book 🙁.`}
+          </Typography>
+          <Divider />
+        </div>
+      );
     }
     return (
       <div className={classes.root}>

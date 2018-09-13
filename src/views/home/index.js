@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import SuggestedBooks from '../../components/suggested';
-import { genres } from '../../genre-list';
+import { genres } from '../../utils/genre-list';
 // import Typography from '@material-ui/core/Typography';
 // import Divider from '@material-ui/core/Divider';
 
@@ -42,6 +42,7 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
+    //   @TODO : once we have saved favr
     const random = items =>
       items[Math.floor(Math.random() * items.length)];
 

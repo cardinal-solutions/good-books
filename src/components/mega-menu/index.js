@@ -4,8 +4,8 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import { genres } from '../../genre-list';
-
+import { genres } from '../../utils/genre-list';
+import { changeStr } from '../../utils/change-str';
 import './mega-menu.css';
 
 class MegaMenu extends Component {
@@ -28,11 +28,8 @@ class MegaMenu extends Component {
     this.setState({ anchorEl: null });
   };
 
-  changeStrCase = string =>
-    string.charAt(0).toUpperCase() + string.slice(1);
   render() {
     const { anchorEl } = this.state;
-
     return (
       <div className="MegaMenu">
         <Button onClick={this.handleClick}>
@@ -48,7 +45,7 @@ class MegaMenu extends Component {
             <MenuItem
               onClick={() => this.handleClose(genre)}
               key={`genre-${idx}`}>
-              {this.changeStrCase(genre)}
+              {changeStr(genre)}
             </MenuItem>
           ))}
         </Menu>

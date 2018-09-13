@@ -5,9 +5,10 @@ import {
   withTheme,
   withStyles,
 } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 import SingleLineGridList from '../../components/single-line-grid-list';
-
 import { getSubjects } from '../../api/subjects';
+import { changeStr } from '../../utils/change-str';
 
 import './SuggestedBooks.css';
 
@@ -55,9 +56,14 @@ class SuggestedBooks extends Component {
       <div className={`Suggested ${classes.root}`}>
         {books && (
           <div>
-            <h2>
-              Suggested books {topic && `in ${topic}.`}
-            </h2>
+            <Typography
+              variant={
+                sidePanel ? 'subheading' : 'headline'
+              }>
+              {`Recommendations for you in ${changeStr(
+                topic
+              )}`}
+            </Typography>
             <SingleLineGridList
               tileData={books}
               side={sidePanel}

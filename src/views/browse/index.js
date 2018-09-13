@@ -10,7 +10,7 @@ import {
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-
+import { changeStr } from '../../utils/change-str';
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -38,11 +38,13 @@ class Browse extends Component {
   }
 
   getData = () => {
-    getSubjects(this.props.match.params.list).then(
-      genre => {
+    getSubjects(this.props.match.params.list)
+      .then(genre => {
         this.setState({ genreList: genre });
-      }
-    );
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -63,16 +65,13 @@ class Browse extends Component {
     const { classes } = this.props;
     const { genreList, filterNullThumbnails } = this.state;
 
-    const genre = string =>
-      string.charAt(0).toUpperCase() + string.slice(1);
-
     return (
       <div className={classes.root}>
         <div className={classes.pageTitle}>
           <Typography variant="display1" gutterBottom>
-            {`Browse ${genre(
+            {`Top Titles in ${changeStr(
               this.props.match.params.list
-            )} Books`}
+            )}`}
           </Typography>
           <FormGroup row>
             <FormControlLabel
