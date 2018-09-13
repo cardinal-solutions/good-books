@@ -33,6 +33,7 @@ class Book extends Component {
     super(props);
     this.state = {
       book: null,
+      error: false,
     };
   }
 
@@ -61,12 +62,18 @@ class Book extends Component {
   }
   setSubjects = test => {
     const arr = [];
-    Object.values(test.subjects).forEach(element =>
-      arr.push(element.name)
-    );
-    this.setState({
-      topic: arr[Math.floor(Math.random() * arr.length)],
-    });
+    try {
+      Object.values(test.subjects).forEach(element =>
+        arr.push(element.name)
+      );
+      this.setState({
+        topic: arr[Math.floor(Math.random() * arr.length)],
+      });
+    } catch (error) {
+      this.setState(state => ({
+        error: !state.error,
+      }));
+    }
   };
 
   render() {
@@ -74,6 +81,9 @@ class Book extends Component {
     const { book, topic } = this.state;
     const id = this.props.match.params.bookid;
 
+    if (this.state.error) {
+      return <h1>Not found</h1>;
+    }
     return (
       <div className={classes.root}>
         {book ? (
