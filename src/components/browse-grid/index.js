@@ -23,6 +23,7 @@ const styles = theme => ({
     color: 'rgba(255, 255, 255, 0.54)',
   },
 });
+
 const BrowseGrid = ({ listTitle, tileData, ...props }) => {
   const { classes } = props;
 

@@ -15,6 +15,7 @@ import BookMetaTable from './BookMetaTable';
 import SuggestedBooks from '../../components/suggested';
 import Thumbnail from '../../components/Thumbnail';
 import { getBook } from '../../api/book';
+import Stars from '../../components/stars';
 
 const styles = theme => ({
   root: {
@@ -30,12 +31,16 @@ const styles = theme => ({
   },
 });
 
+const MAX_RATING = 5;
+
 class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
       book: null,
       error: false,
+      localBook: props.match.params.bookid,
+      localRating: MAX_RATING,
     };
   }
 
@@ -44,6 +49,11 @@ class Book extends Component {
       nextProps.match.params.bookid !==
       this.props.match.params.bookid
     ) {
+      const id = this.props.match.params.bookid;
+      if (!localStorage.hasOwnProperty(id)) {
+        this.setState({ localRating: MAX_RATING });
+      }
+
       this.setBook();
     }
   }
@@ -54,6 +64,9 @@ class Book extends Component {
 
   setBook() {
     const id = this.props.match.params.bookid;
+
+    this.updateStateWithLocalStorage();
+
     getBook(id).then(book => {
       const thisBook = Object.keys(book)[0];
       this.setState(
@@ -62,6 +75,18 @@ class Book extends Component {
       );
     });
   }
+
+  updateStateWithLocalStorage() {
+    const id = this.props.match.params.bookid;
+
+    if (localStorage.hasOwnProperty(id)) {
+      const localRating = localStorage.getItem(id);
+      this.setState({ localRating });
+    } else {
+      localStorage.setItem(id, MAX_RATING);
+    }
+  }
+
   setSubjects = test => {
     const arr = [];
     try {
@@ -80,7 +105,7 @@ class Book extends Component {
 
   render() {
     const { classes } = this.props;
-    const { book, topic } = this.state;
+    const { book, topic, localRating } = this.state;
     const id = this.props.match.params.bookid;
 
     if (this.state.error) {
@@ -93,6 +118,18 @@ class Book extends Component {
         </div>
       );
     }
+    const rating = {
+      size: 40,
+      count: MAX_RATING,
+      value: localRating,
+      onChange: newRating => {
+        console.log(`New rating is ${newRating}`);
+        this.setState({ localRating: newRating }, () =>
+          localStorage.setItem(id, newRating)
+        );
+      },
+    };
+
     return (
       <div className={classes.root}>
         {book ? (
@@ -113,6 +150,8 @@ class Book extends Component {
               </Grid>
 
               <Grid item xs={8}>
+                <Stars {...rating} />
+                {`${localRating} / ${MAX_RATING}`}
                 <BookMetaTable book={book} />
               </Grid>
             </Grid>
