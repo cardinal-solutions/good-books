@@ -7,6 +7,8 @@ import {
 } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import CardContent from '@material-ui/core/CardContent';
 import BookMetaTable from './BookMetaTable';
 
@@ -36,6 +38,7 @@ class Book extends Component {
     super(props);
     this.state = {
       book: null,
+      error: false,
       localBook: props.match.params.bookid,
       localRating: MAX_RATING,
     };
@@ -86,12 +89,18 @@ class Book extends Component {
 
   setSubjects = test => {
     const arr = [];
-    Object.values(test.subjects).forEach(element =>
-      arr.push(element.name)
-    );
-    this.setState({
-      topic: arr[Math.floor(Math.random() * arr.length)],
-    });
+    try {
+      Object.values(test.subjects).forEach(element =>
+        arr.push(element.name)
+      );
+      this.setState({
+        topic: arr[Math.floor(Math.random() * arr.length)],
+      });
+    } catch (error) {
+      this.setState(state => ({
+        error: !state.error,
+      }));
+    }
   };
 
   render() {
@@ -99,6 +108,16 @@ class Book extends Component {
     const { book, topic, localRating } = this.state;
     const id = this.props.match.params.bookid;
 
+    if (this.state.error) {
+      return (
+        <div>
+          <Typography variant="display3">
+            {`Sorry, we couldn't find this book 🙁.`}
+          </Typography>
+          <Divider />
+        </div>
+      );
+    }
     const rating = {
       size: 40,
       count: MAX_RATING,

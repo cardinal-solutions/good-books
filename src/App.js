@@ -7,7 +7,6 @@ import {
 import teal from '@material-ui/core/colors/teal';
 import pink from '@material-ui/core/colors/pink';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 import Header from './components/header';
 import './App.css';
 
@@ -31,12 +30,10 @@ const theme = createMuiTheme({
   },
 });
 
-const renderRoutes = () =>
-  entryRoutes.map((data, key) => {
-    return <Route key={key} {...data} />;
-  });
-
 class App extends Component {
+  handleError = () => {
+    console.log('there was an error');
+  };
   render() {
     return (
       <React.Fragment>
@@ -45,7 +42,11 @@ class App extends Component {
           <div className="App">
             <Header />
             <div className="App__body">
-              <Switch>{renderRoutes()}</Switch>
+              <Switch>
+                {entryRoutes.map((data, key) => {
+                  return <Route key={key} {...data} />;
+                })}
+              </Switch>
             </div>
           </div>
         </MuiThemeProvider>

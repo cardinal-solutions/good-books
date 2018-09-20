@@ -1,10 +1,10 @@
+import { baseUrl, checkStatus } from './common';
+
 export const getSearchResults = input => {
-  const url = `http://openlibrary.org/search.json?q=${input}`;
+  const url = `${baseUrl}/search.json?q=${input}`;
   // todo: extract json() and error handking to helper function
   return fetch(url)
-    .then(response => {
-      return response.json();
-    })
+    .then(checkStatus)
     .then(data => {
       return data.docs;
     });

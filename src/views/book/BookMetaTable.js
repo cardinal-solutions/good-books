@@ -20,17 +20,18 @@ const styles = theme => ({
   },
 });
 const BookMetaTable = ({ book, classes }) => {
+  const authors = book.authors.map(auth => auth.name);
   return (
     <div>
       <Paper className={classes.paper}>
         <h1>{book.title}</h1>
-        {book.authors[0].name}
+        {authors}
       </Paper>
       <Table className={classes.table}>
         <TableBody>
           <TableRow>
             <TableCell>Author</TableCell>
-            <TableCell>{book.authors[0].name}</TableCell>
+            <TableCell>{authors}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Number of Pages</TableCell>
