@@ -3,6 +3,7 @@ import Book from './views/book';
 import BookList from './views/book/List';
 import Search from './views/search';
 import Browse from './views/browse';
+import NotFound from './views/system/NotFound';
 export default [
   {
     path: '/',
@@ -23,13 +24,11 @@ export default [
     component: Book,
   },
   {
-    path: '/book',
-    component: Book,
-    exact: true,
-  },
-  {
     path: '/browse/:list',
     exact: true,
     component: Browse,
+  },
+  {
+    component: NotFound,
   },
 ];

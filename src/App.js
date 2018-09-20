@@ -8,7 +8,6 @@ import teal from '@material-ui/core/colors/teal';
 import pink from '@material-ui/core/colors/pink';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from './components/header';
-import ErrorHandler from './components/error-handler';
 import './App.css';
 
 import entryRoutes from './routes';
@@ -44,11 +43,9 @@ class App extends Component {
             <Header />
             <div className="App__body">
               <Switch>
-                <ErrorHandler>
-                  {entryRoutes.map((data, key) => {
-                    return <Route key={key} {...data} />;
-                  })}
-                </ErrorHandler>
+                {entryRoutes.map((data, key) => {
+                  return <Route key={key} {...data} />;
+                })}
               </Switch>
             </div>
           </div>
