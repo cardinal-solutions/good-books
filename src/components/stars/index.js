@@ -32,20 +32,16 @@ class Stars extends Component {
   constructor(props) {
     super(props);
 
-    // set defaults
-
     props = Object.assign({}, props);
 
     this.state = {
       uniqueness: (Math.random() + '').replace('.', ''),
-      //   value: props.value || 0,
-      value: 5,
       stars: [],
+      value: localStorage.getItem(props.bookId) || 5,
       halfStar: {
         at: Math.floor(props.value),
         hidden: props.half && props.value % 1 < 0.5,
       },
-      bookRating: 5,
     };
 
     this.state.config = {
@@ -63,6 +59,7 @@ class Stars extends Component {
 
   componentDidMount() {
     this.setState({
+      value: 3,
       stars: this.getStars(this.state.value),
     });
   }
@@ -73,26 +70,25 @@ class Stars extends Component {
 
     lynt error: componentWillReceiveProps is deprecated since React 16.3.0, use UNSAFE_componentWillReceiveProps instead, see https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops  react/no-deprecated
   */
-  UNSAFE_componentWillReceiveProps(props) {
-    this.setState({
-      stars: this.getStars(props.value),
-      value: props.value,
-      halfStar: {
-        at: Math.floor(props.value),
-        hidden:
-          this.state.config.half && props.value % 1 < 0.5,
-      },
-      config: Object.assign({}, this.state.config, {
-        count: props.count,
-        size: props.size,
-        char: props.char,
-        color1: props.color1,
-        color2: props.color2,
-        half: props.half,
-        edit: props.edit,
-      }),
-    });
-  }
+  //   UNSAFE_componentWillReceiveProps (props) {
+  //     this.setState ({
+  //       stars: this.getStars (props.value),
+  //       value: props.value,
+  //       halfStar: {
+  //         at: Math.floor (props.value),
+  //         hidden: this.state.config.half && props.value % 1 < 0.5,
+  //       },
+  //       config: Object.assign ({}, this.state.config, {
+  //         count: props.count,
+  //         size: props.size,
+  //         char: props.char,
+  //         color1: props.color1,
+  //         color2: props.color2,
+  //         half: props.half,
+  //         edit: props.edit,
+  //       }),
+  //     });
+  //   }
 
   isDecimal(value) {
     return value % 1 !== 0;
@@ -190,7 +186,7 @@ class Stars extends Component {
     this.onChange(this.props.bookId, value);
   }
   onChange = (id, value) => {
-    localStorage.setItem({ [id]: value });
+    localStorage.setItem(id, value);
   };
 
   renderHalfStarStyleElement() {

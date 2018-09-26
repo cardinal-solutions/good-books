@@ -57,9 +57,9 @@ class Book extends Component {
     });
   }
 
-  setSubjects = test => {
+  setSubjects = book => {
     const arr = [];
-    Object.values(test.subjects).forEach(element =>
+    Object.values(book.subjects).forEach(element =>
       arr.push(element.name)
     );
     this.setState({
@@ -80,9 +80,13 @@ class Book extends Component {
               <Grid item xs={9}>
                 <ListView
                   title={book.title}
-                  author={book.authors.map(
-                    author => author.name
-                  )}
+                  author={
+                    book.authors
+                      ? book.authors.map(
+                          author => author.name
+                        )
+                      : null
+                  }
                   coverType="olid"
                   bookId={id.split(':').pop()}
                   key={book.title}
