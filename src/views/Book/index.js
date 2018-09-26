@@ -6,14 +6,9 @@ import {
   withStyles,
 } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import BookMetaTable from './BookMetaTable';
-
 import SuggestedBooks from '../../components/suggested';
-import Thumbnail from '../../components/Thumbnail';
+import ListView from '../../components/list-view';
 import { getBook } from '../../api/book';
-import Stars from '../../components/stars';
 
 const styles = theme => ({
   root: {
@@ -29,15 +24,11 @@ const styles = theme => ({
   },
 });
 
-const MAX_RATING = 5;
-
 class Book extends Component {
   constructor(props) {
     super(props);
     this.state = {
       book: null,
-      localBook: props.match.params.bookid,
-      localRating: MAX_RATING,
     };
   }
 
@@ -46,11 +37,6 @@ class Book extends Component {
       nextProps.match.params.bookid !==
       this.props.match.params.bookid
     ) {
-      const id = this.props.match.params.bookid;
-      if (!localStorage.hasOwnProperty(id)) {
-        this.setState({ localRating: MAX_RATING });
-      }
-
       this.setBook();
     }
   }
@@ -62,8 +48,6 @@ class Book extends Component {
   setBook() {
     const id = this.props.match.params.bookid;
 
-    this.updateStateWithLocalStorage();
-
     getBook(id).then(book => {
       const thisBook = Object.keys(book)[0];
       this.setState(
@@ -71,17 +55,6 @@ class Book extends Component {
         () => this.setSubjects(this.state.book)
       );
     });
-  }
-
-  updateStateWithLocalStorage() {
-    const id = this.props.match.params.bookid;
-
-    if (localStorage.hasOwnProperty(id)) {
-      const localRating = localStorage.getItem(id);
-      this.setState({ localRating });
-    } else {
-      localStorage.setItem(id, MAX_RATING);
-    }
   }
 
   setSubjects = test => {
@@ -96,47 +69,30 @@ class Book extends Component {
 
   render() {
     const { classes } = this.props;
-    const { book, topic, localRating } = this.state;
+    const { book, topic } = this.state;
     const id = this.props.match.params.bookid;
-
-    const rating = {
-      size: 40,
-      count: MAX_RATING,
-      value: localRating,
-      onChange: newRating => {
-        console.log(`New rating is ${newRating}`);
-        this.setState({ localRating: newRating }, () =>
-          localStorage.setItem(id, newRating)
-        );
-      },
-    };
 
     return (
       <div className={classes.root}>
         {book ? (
           <div>
-            <Grid container spacing={24}>
-              <Grid item xs={4}>
-                <Card className={classes.card}>
-                  <Thumbnail
-                    custom
-                    coverType="OLID"
-                    bookId={id.split(':').pop()}
-                    alt={`Cover for ${book.title}`}
-                  />
-                  <CardContent>
-                    <strong>{id}</strong>
-                  </CardContent>
-                </Card>
+            <Grid container spacing={0}>
+              <Grid item xs={9}>
+                <ListView
+                  title={book.title}
+                  author={book.authors.map(
+                    author => author.name
+                  )}
+                  coverType="olid"
+                  bookId={id.split(':').pop()}
+                  key={book.title}
+                />
               </Grid>
 
-              <Grid item xs={8}>
-                <Stars {...rating} />
-                {`${localRating} / ${MAX_RATING}`}
-                <BookMetaTable book={book} />
+              <Grid item xs={3}>
+                <SuggestedBooks sidePanel topic={topic} />
               </Grid>
             </Grid>
-            <SuggestedBooks topic={topic} />
           </div>
         ) : (
           <div>Loading...</div>

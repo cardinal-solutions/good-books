@@ -38,12 +38,14 @@ class Stars extends Component {
 
     this.state = {
       uniqueness: (Math.random() + '').replace('.', ''),
-      value: props.value || 0,
+      //   value: props.value || 0,
+      value: 5,
       stars: [],
       halfStar: {
         at: Math.floor(props.value),
         hidden: props.half && props.value % 1 < 0.5,
       },
+      bookRating: 5,
     };
 
     this.state.config = {
@@ -162,7 +164,7 @@ class Stars extends Component {
     });
   }
 
-  clicked(event) {
+  handleClick(event) {
     const { config, halfStar } = this.state;
     if (!config.edit) return;
     let index = Number(
@@ -185,8 +187,11 @@ class Stars extends Component {
       value: value,
       stars: this.getStars(index),
     });
-    this.props.onChange(value);
+    this.onChange(this.props.bookId, value);
   }
+  onChange = (id, value) => {
+    localStorage.setItem({ [id]: value });
+  };
 
   renderHalfStarStyleElement() {
     const { config, uniqueness } = this.state;
@@ -237,7 +242,7 @@ class Stars extends Component {
           onMouseOver={this.mouseOver.bind(this)}
           onMouseMove={this.mouseOver.bind(this)}
           onMouseLeave={this.mouseLeave.bind(this)}
-          onClick={this.clicked.bind(this)}>
+          onClick={this.handleClick.bind(this)}>
           {char}
         </span>
       );
@@ -273,14 +278,12 @@ Stars.propTypes = {
 Stars.defaultProps = {
   edit: true,
   half: true,
-  value: 0,
+  //   value: 5,
   count: 5,
   char: '★',
   size: 15,
   color1: 'gray',
   color2: '#ffd700',
-
-  onChange: () => {},
 };
 
 export default Stars;

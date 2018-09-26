@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
+import Stars from '../../components/stars';
+
 class BookMeta extends React.Component {
   static Title = ({ title }) => (
     <Typography variant="title">{title}</Typography>
@@ -8,6 +10,7 @@ class BookMeta extends React.Component {
   static Author = ({ author }) => (
     <Typography variant="subheading">{author}</Typography>
   );
+  static Rating = ({ bookId }) => <Stars bookId={bookId} />;
 
   render() {
     return (
@@ -16,7 +19,7 @@ class BookMeta extends React.Component {
           React.cloneElement(child, {
             title: this.props.title,
             author: this.props.author,
-            subjects: this.props.subjects,
+            bookId: this.props.bookId,
           })
         )}
       </div>

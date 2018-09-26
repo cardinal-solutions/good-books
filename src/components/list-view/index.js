@@ -14,7 +14,7 @@ const styles = {
 const ListView = ({ coverType, bookId, title, author }) => (
   <div style={styles.container}>
     <Grid container spacing={24} wrap="wrap-reverse">
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} sm={6}>
         <Thumbnail
           custom
           coverType={coverType}
@@ -22,10 +22,14 @@ const ListView = ({ coverType, bookId, title, author }) => (
           alt={`Cover for ${title}`}
         />
       </Grid>
-      <Grid item xs={12} sm={4}>
-        <BookMeta title={title} author={author}>
+      <Grid item xs={12} sm={6}>
+        <BookMeta
+          title={title}
+          author={author}
+          bookId={bookId}>
           <BookMeta.Title />
           <BookMeta.Author />
+          <BookMeta.Rating />
         </BookMeta>
       </Grid>
     </Grid>
