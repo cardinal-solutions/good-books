@@ -53,11 +53,11 @@ class Home extends Component {
           container
           spacing={24}
           className={classes.body}>
-          <Grid item xs={8}>
+          <Grid item md={8} xs={12}>
             <SuggestedBooks topic={random(genres)} />
             <SuggestedBooks topic={random(genres)} />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item md={4} xs={12}>
             <Paper className={classes.paper}>
               <SponsoredBook />
               <SuggestedBooks

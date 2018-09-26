@@ -64,32 +64,6 @@ class Stars extends Component {
     });
   }
 
-  /* @todo created this with componentWillReceiveProps but apparently,
-    it's a deprecated lifecycle method that leads to bugs and inconsistencies.
-    Will eventually be componentDidUpdate()
-
-    lynt error: componentWillReceiveProps is deprecated since React 16.3.0, use UNSAFE_componentWillReceiveProps instead, see https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops  react/no-deprecated
-  */
-  //   UNSAFE_componentWillReceiveProps (props) {
-  //     this.setState ({
-  //       stars: this.getStars (props.value),
-  //       value: props.value,
-  //       halfStar: {
-  //         at: Math.floor (props.value),
-  //         hidden: this.state.config.half && props.value % 1 < 0.5,
-  //       },
-  //       config: Object.assign ({}, this.state.config, {
-  //         count: props.count,
-  //         size: props.size,
-  //         char: props.char,
-  //         color1: props.color1,
-  //         color2: props.color2,
-  //         half: props.half,
-  //         edit: props.edit,
-  //       }),
-  //     });
-  //   }
-
   isDecimal(value) {
     return value % 1 !== 0;
   }

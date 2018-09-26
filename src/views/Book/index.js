@@ -77,7 +77,7 @@ class Book extends Component {
         {book ? (
           <div>
             <Grid container spacing={0}>
-              <Grid item xs={9}>
+              <Grid item md={9} xs={12}>
                 <ListView
                   title={book.title}
                   author={
@@ -93,7 +93,7 @@ class Book extends Component {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid item md={3} xs={12}>
                 <SuggestedBooks sidePanel topic={topic} />
               </Grid>
             </Grid>
