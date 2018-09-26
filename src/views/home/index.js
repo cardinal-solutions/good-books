@@ -8,9 +8,8 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import SuggestedBooks from '../../components/suggested';
+import SponsoredBook from '../../components/sponsored-book';
 import { genres } from '../../utils/genre-list';
-// import Typography from '@material-ui/core/Typography';
-// import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
   root: {
@@ -29,7 +28,6 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    textAlign: 'center',
     color: theme.palette.text.secondary,
   },
 });
@@ -61,6 +59,7 @@ class Home extends Component {
           </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper}>
+              <SponsoredBook />
               <SuggestedBooks
                 topic={random(genres)}
                 sidePanel
