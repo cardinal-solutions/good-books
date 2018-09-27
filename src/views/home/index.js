@@ -8,10 +8,10 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import SuggestedBooks from '../../components/suggested';
-import { genres } from '../../utils/genre-list';
-// import Typography from '@material-ui/core/Typography';
-// import Divider from '@material-ui/core/Divider';
+import SponsoredBook from '../../components/sponsored-book';
+import { genres, random } from '../../utils/genre-list';
 
+random(genres);
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -29,7 +29,6 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    textAlign: 'center',
     color: theme.palette.text.secondary,
   },
 });
@@ -42,10 +41,6 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
-    //   @TODO : once we have saved favr
-    const random = items =>
-      items[Math.floor(Math.random() * items.length)];
-
     return (
       <div className={classes.root}>
         <Grid container>
@@ -55,12 +50,13 @@ class Home extends Component {
           container
           spacing={24}
           className={classes.body}>
-          <Grid item xs={8}>
+          <Grid item md={8} xs={12}>
             <SuggestedBooks topic={random(genres)} />
             <SuggestedBooks topic={random(genres)} />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item md={4} xs={12}>
             <Paper className={classes.paper}>
+              <SponsoredBook />
               <SuggestedBooks
                 topic={random(genres)}
                 sidePanel

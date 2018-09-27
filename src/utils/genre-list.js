@@ -27,3 +27,6 @@ export const genres = [
   'young adult',
   'love',
 ];
+
+export const random = items =>
+  items[Math.floor(Math.random() * items.length)];

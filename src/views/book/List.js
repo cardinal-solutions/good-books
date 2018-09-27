@@ -8,12 +8,14 @@ import {
 
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-
+import Grid from '@material-ui/core/Grid';
 import { getSearchResults } from '../../api/search';
 import ListView from '../../components/list-view';
 
 import './Book.css';
-
+import SponsoredBook from '../../components/sponsored-book';
+import SuggestedBooks from '../../components/suggested';
+import { random, genres } from '../../utils/genre-list';
 // const bookID = 'ISBN:0385472579';
 
 const styles = theme => ({
@@ -96,31 +98,45 @@ class BookList extends Component {
     }
   }
 
-  renderSearchResults = () => {
-    const results = this.state.searchResults;
-    return results
-      .filter(
-        result => result.cover_edition_key !== undefined
-      )
-      .map((book, id) => (
-        <ListView
-          title={book.title_suggest}
-          author={book.author_name}
-          coverType="olid"
-          bookId={book.cover_edition_key}
-          key={`book-${id}`}
-        />
-      ));
-  };
-
   render() {
+    const SearchResults = () => {
+      const results = this.state.searchResults;
+      return results
+        .filter(
+          result => result.cover_edition_key !== undefined
+        )
+        .map((book, id) => (
+          <ListView
+            title={book.title_suggest}
+            author={book.author_name}
+            coverType="olid"
+            bookId={book.cover_edition_key}
+            key={`book-${id}`}
+          />
+        ));
+    };
     const { classes } = this.props;
     const { haveResults, searchResults } = this.state;
 
     return (
       <div className={classes.root}>
         {haveResults && searchResults.length !== 0 ? (
-          this.renderSearchResults()
+          <Grid container spacing={0}>
+            <Grid item md={7} xs={12}>
+              <SearchResults />
+            </Grid>
+            <Grid
+              item
+              md={4}
+              xs={12}
+              style={{ marginTop: `3%` }}>
+              <SponsoredBook />
+              <SuggestedBooks
+                topic={random(genres)}
+                sidePanel
+              />
+            </Grid>
+          </Grid>
         ) : (
           <NoResults />
         )}
