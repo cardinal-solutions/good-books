@@ -12,7 +12,7 @@ class SponsoredBook extends React.Component {
         <Typography variant="subheading">
           Featured Book
         </Typography>
-        <div style={{ maxWidth: `75%` }}>
+        <div style={{ maxWidth: `50%` }}>
           <Thumbnail
             custom
             coverType="isbn"

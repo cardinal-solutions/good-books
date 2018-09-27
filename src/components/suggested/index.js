@@ -6,7 +6,7 @@ import {
   withStyles,
 } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import SingleLineGridList from '../../components/single-line-grid-list';
+import BrowseGrid from '../../components/browse-grid';
 import { getSubjects } from '../../api/subjects';
 import { changeStr } from '../../utils/change-str';
 
@@ -49,6 +49,9 @@ class SuggestedBooks extends Component {
     });
   };
 
+  handleClick = () => {
+    this.props.history.push(`/search/${this.props.topic}`);
+  };
   render() {
     const { classes, topic, sidePanel } = this.props;
     const { books } = this.state;
@@ -57,6 +60,8 @@ class SuggestedBooks extends Component {
         {books && (
           <div>
             <Typography
+              style={{ cursor: 'pointer' }} // @todo make click interactios more noticable
+              onClick={this.handleClick}
               variant={
                 sidePanel ? 'subheading' : 'headline'
               }>
@@ -64,10 +69,7 @@ class SuggestedBooks extends Component {
                 topic
               )}`}
             </Typography>
-            <SingleLineGridList
-              tileData={books}
-              side={sidePanel}
-            />
+            <BrowseGrid tileData={books.slice(0, 4)} />
           </div>
         )}
       </div>

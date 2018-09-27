@@ -9,8 +9,9 @@ import Grid from '@material-ui/core/Grid';
 
 import SuggestedBooks from '../../components/suggested';
 import SponsoredBook from '../../components/sponsored-book';
-import { genres } from '../../utils/genre-list';
+import { genres, random } from '../../utils/genre-list';
 
+random(genres);
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -40,10 +41,6 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
-    //   @TODO : once we have saved favr
-    const random = items =>
-      items[Math.floor(Math.random() * items.length)];
-
     return (
       <div className={classes.root}>
         <Grid container>

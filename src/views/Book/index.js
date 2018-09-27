@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import SuggestedBooks from '../../components/suggested';
 import ListView from '../../components/list-view';
 import { getBook } from '../../api/book';
+import { random } from '../../utils/genre-list';
 
 const styles = theme => ({
   root: {
@@ -63,7 +64,7 @@ class Book extends Component {
       arr.push(element.name)
     );
     this.setState({
-      topic: arr[Math.floor(Math.random() * arr.length)],
+      topic: random(arr),
     });
   };
 
@@ -77,7 +78,7 @@ class Book extends Component {
         {book ? (
           <div>
             <Grid container spacing={0}>
-              <Grid item md={9} xs={12}>
+              <Grid item md={7} xs={12}>
                 <ListView
                   title={book.title}
                   author={
@@ -92,8 +93,11 @@ class Book extends Component {
                   key={book.title}
                 />
               </Grid>
-
-              <Grid item md={3} xs={12}>
+              <Grid
+                item
+                md={4}
+                xs={12}
+                style={{ marginTop: `3%` }}>
                 <SuggestedBooks sidePanel topic={topic} />
               </Grid>
             </Grid>
