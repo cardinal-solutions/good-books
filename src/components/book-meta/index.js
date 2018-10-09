@@ -7,7 +7,7 @@ class BookMeta extends React.Component {
   static SubTitle = ({ subtitle }) => (
     <h3 className="book-meta__subtitle">{subtitle}</h3>
   );
-  static Author = ({ author }) => <h3>by {author}</h3>;
+  static Author = ({ author }) => <h3>{author}</h3>;
 
   static Rating = ({ bookId }) => <Stars bookId={bookId} />;
 

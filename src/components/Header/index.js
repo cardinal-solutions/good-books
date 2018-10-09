@@ -91,7 +91,6 @@ class Header extends Component {
 
   render() {
     const isMobile = this.state.width < 960;
-    console.log(isMobile);
     return (
       <div>
         <Layout

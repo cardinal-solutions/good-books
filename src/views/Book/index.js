@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import BookMeta from '../../components/book-meta';
 import Thumbnail from '../../components/Thumbnail';
 import Layout from '../../components/layout';
+import SuggestedBooks from '../../components/suggested';
 import { getBook } from '../../api/book';
 import { random } from '../../utils/genre-list';
 
@@ -51,9 +52,8 @@ class Book extends Component {
   };
 
   render() {
-    const { book } = this.state;
+    const { book, topic } = this.state;
     const id = this.props.match.params.bookid;
-
     return (
       <div className="book-view">
         {book ? (
@@ -63,9 +63,10 @@ class Book extends Component {
               left={
                 <BookMeta
                   title={book.title}
-                  author={book.authors.map(
-                    auth => auth.name
-                  )}
+                  author={
+                    book.by_statement ||
+                    book.authors.map(auth => auth.name)
+                  }
                   bookId={book.bookId}
                   subtitle={book.subtitle}>
                   <BookMeta.Title />
@@ -86,6 +87,7 @@ class Book extends Component {
                 </div>
               }
             />
+            <SuggestedBooks topic={topic} />;
           </div>
         ) : (
           <div>Loading...</div>
