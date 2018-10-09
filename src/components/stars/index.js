@@ -59,7 +59,7 @@ class Stars extends Component {
 
   componentDidMount() {
     this.setState({
-      value: 3,
+      //   value: 3, remove
       stars: this.getStars(this.state.value),
     });
   }
@@ -200,7 +200,7 @@ class Stars extends Component {
       const style = Object.assign({}, defaultStyles, {
         color: star.active ? color2 : color1,
         cursor: edit ? 'pointer' : 'default',
-        fontSize: `${size}px`,
+        fontSize: `${size}rem`,
       });
       return (
         <span
@@ -251,7 +251,7 @@ Stars.defaultProps = {
   //   value: 5,
   count: 5,
   char: '★',
-  size: 15,
+  size: 1.5,
   color1: 'gray',
   color2: '#ffd700',
 };

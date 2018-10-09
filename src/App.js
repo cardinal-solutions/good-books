@@ -39,7 +39,7 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
-          <div className="App">
+          <div className="app">
             <Header />
             <div className="App__body">
               <Switch>

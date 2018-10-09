@@ -1,0 +1,6 @@
+.app {
+  padding-left: 5%;
+  @media (max-width: 960px) {
+    padding-left: 0;
+  }
+}

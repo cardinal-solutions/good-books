@@ -1,48 +1,12 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import {
-  withTheme,
-  withStyles,
-} from '@material-ui/core/styles';
-
-import AppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Toolbar from '@material-ui/core/Toolbar';
-
-import MegaMenu from '../mega-menu';
+import { withRouter } from 'react-router-dom';
+import Layout from '../layout';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
-
+import logoBlack from '../../img/bg-logo.png';
+import logoWhite from '../../img/logo-white.png';
 import './Header.css';
-
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    display: 'flex',
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  menuButton: {},
-  search: {
-    cursor: 'pointer',
-  },
-};
-
-const options = [
-  {
-    title: 'Advance Search',
-    url: '/search',
-  },
-];
-
-const ITEM_HEIGHT = 48;
 
 class Header extends Component {
   constructor(props) {
@@ -51,6 +15,7 @@ class Header extends Component {
       anchorEl: null,
       searchValue: '',
       showSearchInput: false,
+      width: window.innerWidth,
     };
   }
 
@@ -81,7 +46,14 @@ class Header extends Component {
     );
     this.setState({ searchValue: '' });
   };
-
+  updateWidth = () => {
+    this.setState({
+      width: window.innerWidth,
+    });
+  };
+  componentDidMount() {
+    window.addEventListener('resize', this.updateWidth);
+  }
   renderSearch = () => {
     const { showSearchInput } = this.state;
     return (
@@ -90,10 +62,7 @@ class Header extends Component {
         autoComplete="off"
         onSubmit={this.handleSubmit}>
         <Grid container alignItems="center" spacing={16}>
-          <Grid
-            item
-            onClick={() => this.toggleSearch()}
-            className={this.props.classes.search}>
+          <Grid item onClick={() => this.toggleSearch()}>
             <Search />
           </Grid>
           {showSearchInput ? (
@@ -121,81 +90,37 @@ class Header extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    const { anchorEl } = this.state;
-    //   @todo: <Searchbar /> and its state needs to be lifted here to manage programmtic routing to /search
-
+    const isMobile = this.state.width < 960;
+    console.log(isMobile);
     return (
-      <div className={classes.root}>
-        <AppBar position="static" className="Header">
-          <Toolbar>
-            <div className={classes.flex}>
-              <Link to="/">
-                <div className="logo">GB</div>
-              </Link>
-              {this.renderSearch()}
-            </div>
-
-            {/* <Button
-              component={Link}
-              to="/search"
-              color="inherit">
-              Search
-            </Button> */}
-
-            <MegaMenu menuTitle="Browse" />
-
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="More"
-              aria-owns={anchorEl ? 'long-menu' : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}>
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              id="long-menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={this.handleClose}
-              PaperProps={{
-                style: {
-                  maxHeight: ITEM_HEIGHT * 4.5,
-                  width: 200,
-                },
-              }}>
-              {options.map(option => (
-                <MenuItem
-                  key={option.title}
-                  onClick={() =>
-                    this.handleClose(option.url)
-                  }>
-                  {option.title}
-                </MenuItem>
-              ))}
-            </Menu>
-          </Toolbar>
-        </AppBar>
+      <div>
+        <Layout
+          left={
+            <Grid
+              container
+              spacing={0}
+              alignItems="center"
+              justify="space-around"
+              className="header">
+              <Grid item md={4}>
+                <img
+                  src={isMobile ? logoWhite : logoBlack}
+                  alt="Good Books logo"
+                />
+              </Grid>
+              <Grid item md={4}>
+                <p className="header__text">Search</p>
+              </Grid>
+              <Grid item md={4}>
+                <p className="header__text">Browse</p>
+              </Grid>
+            </Grid>
+          }
+          right={<div className="black-background" />}
+        />
       </div>
     );
   }
 }
 
-export default withTheme()(
-  withStyles(styles)(withRouter(Header))
-);
-/* notes:
-  export default withTheme()(withStyles(styles)(Modal));
-
-  export default withStyles(styles, { withTheme: true })(Modal);
-
-  or
-
-  import { compose } from 'recompose';
-
-  export default compose(
-    withTheme(),
-    withStyles(styles)
-  )(Modal);
-*/
+export default withRouter(Header);

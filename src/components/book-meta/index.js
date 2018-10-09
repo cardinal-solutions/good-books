@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import Stars from '../../components/stars';
-
+import './book-meta.css';
 class BookMeta extends React.Component {
-  static Title = ({ title }) => (
-    <Typography variant="title">{title}</Typography>
+  static Title = ({ title }) => <h1>{title}</h1>;
+  static SubTitle = ({ subtitle }) => (
+    <h3 className="book-meta__subtitle">{subtitle}</h3>
   );
-  static Author = ({ author }) => (
-    <Typography variant="subheading">{author}</Typography>
-  );
+  static Author = ({ author }) => <h3>by {author}</h3>;
+
   static Rating = ({ bookId }) => <Stars bookId={bookId} />;
 
   render() {
     return (
-      <div>
+      <div className="book-meta">
         {React.Children.map(this.props.children, child =>
           React.cloneElement(child, {
             title: this.props.title,
             author: this.props.author,
             bookId: this.props.bookId,
+            subtitle: this.props.subtitle,
           })
         )}
       </div>
