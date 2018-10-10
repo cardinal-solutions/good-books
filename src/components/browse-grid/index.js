@@ -18,6 +18,8 @@ const styles = theme => ({
   },
   gridList: {
     width: '100%',
+    flexWrap: 'nowrap',
+    transform: 'translateZ(0)',
   },
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',

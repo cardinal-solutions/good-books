@@ -6,11 +6,11 @@ import {
   withStyles,
 } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import BrowseGrid from '../../components/browse-grid';
 import { getSubjects } from '../../api/subjects';
 import { changeStr } from '../../utils/change-str';
 
 import './SuggestedBooks.css';
+import SingleLineGridList from '../../components/single-line-grid-list';
 
 const styles = theme => ({
   root: {
@@ -53,23 +53,23 @@ class SuggestedBooks extends Component {
     this.props.history.push(`/search/${this.props.topic}`);
   };
   render() {
-    const { classes, topic, sidePanel } = this.props;
+    const { topic } = this.props;
     const { books } = this.state;
     return (
-      <div className={`Suggested ${classes.root}`}>
+      <div className="suggested-books">
         {books && (
           <div>
             <Typography
-              style={{ cursor: 'pointer' }} // @todo make click interactios more noticable
+              style={{
+                cursor: 'pointer',
+                marginBottom: '2%',
+                fontWeight: '500',
+              }}
               onClick={this.handleClick}
-              variant={
-                sidePanel ? 'subheading' : 'headline'
-              }>
-              {`Recommendations for you in ${changeStr(
-                topic
-              )}`}
+              variant="subheading">
+              {`More books about ${changeStr(topic)}`}
             </Typography>
-            <BrowseGrid tileData={books.slice(0, 4)} />
+            <SingleLineGridList tileData={books} />
           </div>
         )}
       </div>

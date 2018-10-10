@@ -39,9 +39,9 @@ class App extends Component {
       <React.Fragment>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
-          <div className="App">
+          <div className="app">
             <Header />
-            <div className="App__body">
+            <div className="app__body">
               <Switch>
                 {entryRoutes.map((data, key) => {
                   return <Route key={key} {...data} />;

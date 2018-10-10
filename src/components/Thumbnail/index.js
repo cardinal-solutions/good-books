@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import placeholder from '../../img/placeholder.png';
 const style = {
-  container: { width: '100%' },
+  container: { width: '100%', position: 'relative' },
   img: { minWidth: '100%', maxWidth: '100%' },
 };
 

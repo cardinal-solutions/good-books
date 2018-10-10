@@ -4,9 +4,6 @@ import { withRouter } from 'react-router-dom';
 
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 import Thumbnail from '../../components/Thumbnail';
 
@@ -23,6 +20,7 @@ const styles = theme => ({
     transform: 'translateZ(0)',
     width: '100%',
     backgroundColor: '#ffffff',
+    position: 'relative',
   },
   title: { color: theme.palette.primary },
   titleBar: {
@@ -35,14 +33,15 @@ const styles = theme => ({
 });
 
 const SingleLineGridList = ({ tileData, ...props }) => {
-  const { classes, history, side } = props;
+  const { classes, history } = props;
 
   return (
     <div className={classes.root}>
       <GridList
         className={classes.gridList}
-        cellHeight="auto"
-        cols={side ? 3.5 : 8.5}>
+        cols={5.5}
+        spacing={24}
+        cellHeight={294}>
         {tileData.map(data => (
           <GridListTile
             key={data.title}
@@ -56,20 +55,7 @@ const SingleLineGridList = ({ tileData, ...props }) => {
               coverType="OLID"
               bookId={data.cover_edition_key}
               alt={`Cover for ${data.title}`}
-            />
-            <GridListTileBar
-              title={data.title}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton className={classes.icon}>
-                  <StarBorderIcon
-                    className={classes.title}
-                  />
-                </IconButton>
-              }
+              style={{ height: '200' }}
             />
           </GridListTile>
         ))}
