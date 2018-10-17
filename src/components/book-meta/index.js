@@ -1,8 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Stars from '../../components/stars';
+import { string, array } from 'prop-types';
 import './book-meta.css';
 class BookMeta extends React.Component {
+  static propTypes = {
+    title: string,
+    author: string || array,
+    bookId: string,
+    subtitle: string,
+  };
   static Title = ({ title }) => <h1>{title}</h1>;
   static SubTitle = ({ subtitle }) => (
     <h3 className="book-meta__subtitle">{subtitle}</h3>
@@ -26,11 +32,5 @@ class BookMeta extends React.Component {
     );
   }
 }
-
-BookMeta.propTypes = {
-  title: PropTypes.string,
-  author: PropTypes.array,
-  subjects: PropTypes.string,
-};
 
 export default BookMeta;
