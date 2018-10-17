@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import BookMeta from '../../components/book-meta';
 import Thumbnail from '../../components/Thumbnail';
 import Layout from '../../components/layout';
 import SuggestedBooks from '../../components/suggested';
+import SponsoredBook from '../../components/sponsored-book';
 import { getBook } from '../../api/book';
 import { random } from '../../utils/genre-list';
 
 class Book extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      book: null,
-    };
-  }
+  state = {
+    book: null,
+  };
 
   componentDidUpdate(nextProps) {
     if (
@@ -60,6 +57,7 @@ class Book extends Component {
           <div>
             <Layout
               wrap="wrap-reverse"
+              mdLeft={6}
               left={
                 <BookMeta
                   title={book.title}
@@ -75,6 +73,7 @@ class Book extends Component {
                   <BookMeta.Rating />
                 </BookMeta>
               }
+              mdRight={6}
               right={
                 <div className="book-view__thumbnail">
                   <Thumbnail
@@ -87,7 +86,14 @@ class Book extends Component {
                 </div>
               }
             />
-            <SuggestedBooks topic={topic} />;
+            <Layout
+              mdLeft={4}
+              left={<SponsoredBook />}
+              right={`placeholder for other meta-table`}
+            />
+            <div className="book-view__suggested">
+              <SuggestedBooks topic={topic} />
+            </div>
           </div>
         ) : (
           <div>Loading...</div>
@@ -96,11 +102,5 @@ class Book extends Component {
     );
   }
 }
-
-Book.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-Book.defaultProps = {};
 
 export default withRouter(Book);

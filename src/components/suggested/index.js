@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import {
   withTheme,
@@ -20,12 +19,12 @@ const styles = theme => ({
 });
 
 class SuggestedBooks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: null,
-    };
-  }
+  static defaultProps = {
+    topic: '',
+  };
+  state = {
+    books: null,
+  };
 
   componentDidUpdate = prevProps => {
     if (this.props.topic !== prevProps.topic) {
@@ -62,7 +61,7 @@ class SuggestedBooks extends Component {
             <Typography
               style={{
                 cursor: 'pointer',
-                marginBottom: '2%',
+                margin: '2% 0',
                 fontWeight: '500',
               }}
               onClick={this.handleClick}
@@ -76,19 +75,6 @@ class SuggestedBooks extends Component {
     );
   }
 }
-
-SuggestedBooks.propTypes = {
-  match: PropTypes.object,
-  classes: PropTypes.object.isRequired,
-  topic: PropTypes.string,
-  sidePanel: PropTypes.bool,
-};
-
-SuggestedBooks.defaultProps = {
-  match: {},
-  topic: '',
-  sidePanel: false,
-};
 
 export default withTheme()(
   withStyles(styles)(withRouter(SuggestedBooks))

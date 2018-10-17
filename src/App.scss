@@ -1,11 +1,8 @@
 .app {
-  padding-left: 5%;
+  padding-left: 10%;
   height: 100%;
 
   @media (max-width: 960px) {
     padding-left: 0;
-  }
-  &__body {
-    padding-left: 5%;
   }
 }

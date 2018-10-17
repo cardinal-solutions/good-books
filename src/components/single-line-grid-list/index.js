@@ -18,7 +18,7 @@ const styles = theme => ({
   gridList: {
     flexWrap: 'nowrap',
     transform: 'translateZ(0)',
-    width: '100%',
+    width: 'auto',
     backgroundColor: '#ffffff',
     position: 'relative',
   },
