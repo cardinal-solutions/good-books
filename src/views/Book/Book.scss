@@ -11,12 +11,14 @@
   &__thumbnail {
     position: relative;
     bottom: 130px;
-    max-width: 94%;
+    max-width: 80%;
+    margin-left: 5%;
     width: 100%;
     @media (max-width: 960px) {
-      max-width: 100%;
+      max-width: 80%;
       top: -180px;
-      padding-right: 5%;
+      margin-right: auto;
+      margin-left: auto;
       position: relative;
     }
   }
