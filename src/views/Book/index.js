@@ -92,7 +92,7 @@ class Book extends Component {
               right={`placeholder for other meta-table`}
             />
             <div className="book-view__suggested">
-              <SuggestedBooks topic={topic} />;
+              <SuggestedBooks topic={topic} />
             </div>
           </div>
         ) : (
