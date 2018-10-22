@@ -1,20 +1,16 @@
 import React from 'react';
 
-import {
-  withTheme,
-  withStyles,
-} from '@material-ui/core/styles';
-
-const styles = theme => ({});
-const BookMetaTabs = () => {
+import { Typography } from '@material-ui/core';
+const BookMetaTabs = props => {
   return (
     <div>
-      <hr />
-      MetaTabs here!
+      <Typography
+        variant="subheading"
+        style={{ margin: '5% 0', fontWeight: '500' }}>
+        {props.bookTitle} Additional Information
+      </Typography>
     </div>
   );
 };
 
-export default withTheme()(
-  withStyles(styles)(BookMetaTabs)
-);
+export default BookMetaTabs;

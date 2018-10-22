@@ -105,7 +105,9 @@ class Book extends Component {
               mdLeft={4}
               left={<SponsoredBook />}
               mdRight={8}
-              right={<BookMetaTabs />}
+              right={
+                <BookMetaTabs bookTitle={book.title} />
+              }
             />
             <div className="book-view__suggested">
               <SuggestedBooks topic={topic} />
