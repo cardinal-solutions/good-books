@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
 import BookMeta from '../../components/book-meta';
 import Thumbnail from '../../components/Thumbnail';
 import Layout from '../../components/layout';
@@ -102,11 +103,24 @@ class Book extends Component {
               }
             />
             <Layout
-              mdLeft={4}
+              mdLeft={3}
+              left={null}
+              mdRight={9}
+              right={<Divider />}
+            />
+
+            <Layout
+              mdLeft={3}
               left={<SponsoredBook />}
-              mdRight={8}
+              mdRight={9}
               right={
-                <BookMetaTabs bookTitle={book.title} />
+                <div>
+                  <Divider />
+                  <BookMetaTabs
+                    bookTitle={book.title}
+                    book={book}
+                  />
+                </div>
               }
             />
             <div className="book-view__suggested">

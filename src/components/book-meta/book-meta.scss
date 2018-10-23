@@ -3,9 +3,12 @@
   position: relative;
   &__subtitle {
     font-weight: 300;
+    margin: 5px 0;
   }
+  &__author,
   &__rating {
-    margin: 5% 0;
+    @extend .book-meta__subtitle;
+    font-weight: 700;
   }
   h1 {
     font-family: 'Roboto Slab', sans-serif;
