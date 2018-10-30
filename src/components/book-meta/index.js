@@ -5,7 +5,7 @@ import './book-meta.css';
 class BookMeta extends React.Component {
   static propTypes = {
     title: string,
-    author: string || array,
+    author: string || array, // TODO: fix this
     bookId: string,
     subtitle: string,
   };
@@ -13,9 +13,13 @@ class BookMeta extends React.Component {
   static SubTitle = ({ subtitle }) => (
     <h3 className="book-meta__subtitle">{subtitle}</h3>
   );
-  static Author = ({ author }) => <h3>{author}</h3>;
+  static Author = ({ author }) => (
+    <h3 className="book-meta__author">{author}</h3>
+  );
 
-  static Rating = ({ bookId }) => <Stars bookId={bookId} />;
+  static Rating = ({ bookId }) => (
+    <Stars bookId={bookId} className="book-meta__rating" />
+  );
 
   render() {
     return (

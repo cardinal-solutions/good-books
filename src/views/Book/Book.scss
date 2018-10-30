@@ -5,18 +5,17 @@
   bottom: 200px;
   @media (max-width: 960px) {
     .book-meta {
-      bottom: 185px;
+      bottom: 150px;
     }
   }
   &__thumbnail {
     position: relative;
-    bottom: 130px;
-    max-width: 80%;
+    bottom: 150px;
+    max-width: 60%;
     margin-left: 5%;
     width: 100%;
     @media (max-width: 960px) {
-      max-width: 80%;
-      top: -180px;
+      top: -140px;
       margin-right: auto;
       margin-left: auto;
       position: relative;

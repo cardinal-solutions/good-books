@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
 import BookMeta from '../../components/book-meta';
 import Thumbnail from '../../components/Thumbnail';
 import Layout from '../../components/layout';
 import SuggestedBooks from '../../components/suggested';
 import SponsoredBook from '../../components/sponsored-book';
+import AuthorsList from '../../components/authors-list';
+import FavoritesBtn from '../../components/favorites-btn';
+import BookMetaTabs from './BookMetaTabs';
 import { getBook } from '../../api/book';
 import { random } from '../../utils/genre-list';
 
@@ -59,19 +63,31 @@ class Book extends Component {
               wrap="wrap-reverse"
               mdLeft={6}
               left={
-                <BookMeta
-                  title={book.title}
-                  author={
-                    book.by_statement ||
-                    book.authors.map(auth => auth.name)
-                  }
-                  bookId={book.bookId}
-                  subtitle={book.subtitle}>
-                  <BookMeta.Title />
-                  <BookMeta.SubTitle />
-                  <BookMeta.Author />
-                  <BookMeta.Rating />
-                </BookMeta>
+                <div>
+                  <BookMeta
+                    title={book.title}
+                    author={
+                      book.by_statement ||
+                      book.authors.map(auth => auth.name)
+                    }
+                    bookId={book.bookId}
+                    subtitle={book.subtitle}>
+                    <BookMeta.Title />
+                    <BookMeta.SubTitle />
+                    <BookMeta.Author />
+                    <BookMeta.Rating />
+                  </BookMeta>
+                  <Layout
+                    left={<FavoritesBtn />}
+                    right={
+                      <AuthorsList
+                        author={book.authors.map(
+                          auth => auth.name
+                        )}
+                      />
+                    }
+                  />
+                </div>
               }
               mdRight={6}
               right={
@@ -87,9 +103,25 @@ class Book extends Component {
               }
             />
             <Layout
-              mdLeft={4}
+              mdLeft={3}
+              left={null}
+              mdRight={9}
+              right={<Divider />}
+            />
+
+            <Layout
+              mdLeft={3}
               left={<SponsoredBook />}
-              right={`placeholder for other meta-table`}
+              mdRight={9}
+              right={
+                <div>
+                  <Divider />
+                  <BookMetaTabs
+                    bookTitle={book.title}
+                    book={book}
+                  />
+                </div>
+              }
             />
             <div className="book-view__suggested">
               <SuggestedBooks topic={topic} />

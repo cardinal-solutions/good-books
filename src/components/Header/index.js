@@ -99,7 +99,7 @@ class Header extends Component {
               container
               spacing={0}
               alignItems="center"
-              justify="space-around"
+              justify="space-evenly"
               className="header">
               <Grid item md={4}>
                 <img

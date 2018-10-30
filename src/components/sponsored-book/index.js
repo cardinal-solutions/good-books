@@ -7,7 +7,7 @@ const SponsoredBook = () => (
   <div className="sponsored-book">
     <Typography
       variant="subheading"
-      style={{ margin: '5% 0', fontWeight: '500' }}>
+      style={{ fontWeight: '500' }}>
       Sponsored Book
     </Typography>
     <div className="sponsored-book__thumbnail">

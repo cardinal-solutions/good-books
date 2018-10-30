@@ -46,7 +46,6 @@ const SearchResults = ({ results }) => {
     ));
 };
 
-// @todo:  Need to programmatically route to Search from any url
 class Search extends Component {
   state = {
     searchResults: [],

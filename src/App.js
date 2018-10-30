@@ -4,8 +4,6 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from '@material-ui/core/styles';
-import teal from '@material-ui/core/colors/teal';
-import pink from '@material-ui/core/colors/pink';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from './components/header';
 import './App.css';
@@ -14,18 +12,13 @@ import entryRoutes from './routes';
 
 const theme = createMuiTheme({
   palette: {
+    divider: '#FFEB3B',
     primary: {
-      // light: will be calculated from palette.primary.main,
-      main: teal[500],
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
+      main: '#9E9E9E',
+      dark: '#616161',
+      light: '#F5F5F5',
     },
-    secondary: {
-      light: '#f73378',
-      main: pink['A400'],
-      dark: pink[900],
-      contrastText: '#ffcc00',
-    },
+    // secondary: {},
     // error: will use the default color
   },
 });
